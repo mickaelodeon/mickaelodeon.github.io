@@ -134,7 +134,7 @@
   .intro .iskip{position:absolute;bottom:2rem;font-size:.8rem;color:rgba(246,244,239,.45);font-family:var(--sans)}
   .intro.out{animation:iout .9s var(--ease-in-out) forwards}
   @keyframes iout{to{clip-path:inset(0 0 100% 0)}}
-  body.pre .constellation polyline,body.pre .constellation circle,body.pre .rise,body.pre .portrait,body.pre .portrait img,body.pre .portrait figcaption,body.pre .hero .cue{animation-play-state:paused}
+  body.pre .constellation polyline,body.pre .constellation circle,body.pre .rise,body.pre .portrait .frame,body.pre .portrait img,body.pre .portrait figcaption,body.pre .portrait .offset,body.pre .portrait .tick,body.pre .hero .cue{animation-play-state:paused}
 
   /* ---------- dot rail ---------- */
   .rail-nav{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:14px;opacity:0;transition:opacity .5s;pointer-events:none}
@@ -240,6 +240,63 @@
   .track:hover{cursor:none}
   .moments .aurora{filter:blur(70px) hue-rotate(var(--hue,0deg))}
 
+  /* ---------- framed photos: offset brass frame + corner ticks + 3D tilt ---------- */
+  .framed{position:relative;perspective:1200px}
+  .framed .tilt{position:relative;transform-style:preserve-3d;transition:transform .6s var(--ease);will-change:transform}
+  .framed .offset{position:absolute;inset:0;border:1px solid var(--brass-ink);translate:16px 16px;pointer-events:none;transform:translateZ(-40px);opacity:.75}
+  .framed.on-light .offset{border-color:var(--brass);opacity:.6}
+  .framed .tick{position:absolute;width:18px;height:18px;pointer-events:none;transform:translateZ(30px)}
+  .framed .tick::before,.framed .tick::after{content:"";position:absolute;background:var(--brass-ink)}
+  .framed.on-light .tick::before,.framed.on-light .tick::after{background:var(--brass)}
+  .framed .tick::before{width:100%;height:1px}.framed .tick::after{width:1px;height:100%}
+  .framed .tick.tl{left:-9px;top:-9px}.framed .tick.tl::before{top:0}.framed .tick.tl::after{left:0}
+  .framed .tick.tr{right:-9px;top:-9px}.framed .tick.tr::before{top:0}.framed .tick.tr::after{right:0}
+  .framed .tick.bl{left:-9px;bottom:-9px}.framed .tick.bl::before{bottom:0}.framed .tick.bl::after{left:0}
+  .framed .tick.br{right:-9px;bottom:-9px}.framed .tick.br::before{bottom:0}.framed .tick.br::after{right:0}
+  .framed .glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.14),transparent 55%);opacity:0;transition:opacity .4s;transform:translateZ(1px)}
+  .framed:hover .glare{opacity:1}
+  .framed .plate{position:absolute;left:-1px;bottom:-1px;translate:0 100%;margin-top:0;padding:.55rem .9rem;background:var(--brass-ink);color:var(--ink);font-size:.78rem;font-weight:700;letter-spacing:.04em;transform:translateZ(20px)}
+  /* hero portrait keeps its own reveal; the frame rides on .tilt */
+  .portrait{overflow:visible}
+  .portrait .frame{overflow:hidden;border-radius:2px}
+  .portrait figcaption{border-radius:0 0 2px 2px}
+  /* aside photos in Who / Teach */
+  .aside-photo{margin:0 0 2.2rem;aspect-ratio:4/3;overflow:hidden;border-radius:2px}
+  .aside-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;transition:transform 1.4s var(--ease)}
+  .framed:hover .aside-photo img{transform:scale(1.04)}
+  .aside-cap{font-size:.85rem;color:var(--muted);margin:-1.4rem 0 2.2rem;padding-left:calc(16px + .2rem)}
+  .wide{margin:clamp(2.5rem,5vw,4rem) 0 0;aspect-ratio:21/8;overflow:hidden;border-radius:2px}
+  .wide img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;transition:transform 1.6s var(--ease)}
+  .framed:hover .wide img{transform:scale(1.04)}
+  .wide-cap{font-size:.88rem;color:var(--muted);margin:1.7rem 0 0}
+
+  /* ---------- 3D tilt tiles ---------- */
+  [data-tilt]{transform-style:preserve-3d;transition:transform .5s var(--ease),box-shadow .5s var(--ease);will-change:transform}
+  [data-tilt]:hover{box-shadow:0 24px 60px -30px rgba(15,26,43,.45)}
+  .courses,.games,.channels,.strengths{perspective:1000px}
+  .courses > div,.games > div,.channels > div{transform-style:preserve-3d}
+  .courses > div > *,.games > div > *{transform:translateZ(14px)}
+
+  /* ---------- hero: tilted orbital ring ---------- */
+  .orbit{position:absolute;right:6vw;top:50%;width:min(64vmin,620px);aspect-ratio:1;margin-top:calc(min(64vmin,620px) / -2);pointer-events:none;transform:rotateX(66deg) rotateZ(-18deg);transform-style:preserve-3d;perspective:900px}
+  .orbit .ring{position:absolute;inset:0;right:auto;top:auto;width:100%;margin:0}
+  .orbit .ring::after{width:9px;height:9px;margin-left:-4.5px;top:-4.5px;box-shadow:0 0 18px 4px rgba(217,182,92,.7)}
+  .ring.r2{transform:rotateX(28deg)}
+
+  /* ---------- journey timeline ---------- */
+  .journey{position:relative;margin:0 0 clamp(2.5rem,5vw,4rem);padding:1.6rem 0 0}
+  .journey .line{position:absolute;left:0;right:0;top:calc(1.6rem + 6px);height:1px;background:var(--line)}
+  .journey .line i{position:absolute;inset:0;background:var(--brass);transform-origin:left;transform:scaleX(0);transition:transform 2.2s var(--ease-in-out)}
+  .journey.in .line i{transform:scaleX(1)}
+  .journey ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+  .journey li{position:relative;padding-top:1.4rem;opacity:0;transform:translateY(10px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .journey.in li{opacity:1;transform:none}
+  .journey li:nth-child(1){transition-delay:.3s}.journey li:nth-child(2){transition-delay:.7s}.journey li:nth-child(3){transition-delay:1.1s}.journey li:nth-child(4){transition-delay:1.5s}.journey li:nth-child(5){transition-delay:1.9s}
+  .journey li::before{content:"";position:absolute;left:0;top:0;width:13px;height:13px;border-radius:50%;background:var(--paper);border:1px solid var(--brass)}
+  .journey li::after{content:"";position:absolute;left:4px;top:4px;width:5px;height:5px;border-radius:50%;background:var(--brass)}
+  .journey .y{font-family:var(--display);font-size:1.5rem;font-variation-settings:"opsz" 48;line-height:1}
+  .journey .m{margin:.4rem 0 0;font-size:.88rem;color:var(--muted);max-width:none}
+
   .progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--brass);transform:scaleX(0);transform-origin:left;z-index:50;pointer-events:none}
 
   /* ---------- hero (pinned; the page slides over it) ---------- */
@@ -255,12 +312,18 @@
   .hero .cue{position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);width:1px;height:56px;background:linear-gradient(to bottom,transparent,rgba(246,244,239,.6));opacity:0;animation:fade 1s ease 1.8s forwards}
   .hero .cue::after{content:"";position:absolute;left:-2px;top:0;width:5px;height:5px;border-radius:50%;background:var(--brass-ink);animation:drop 2.2s var(--ease-in-out) infinite}
   @keyframes drop{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(52px);opacity:0}}
-  .portrait{margin:0;position:relative;aspect-ratio:4/4.8;max-height:78vh;overflow:hidden;border-radius:2px;background:#0b1422;will-change:transform,opacity;clip-path:inset(100% 0 0 0);animation:unveil 1.4s var(--ease-in-out) .35s forwards}
+  .portrait{margin:0;position:relative;aspect-ratio:4/4.8;max-height:78vh;border-radius:2px;will-change:transform,opacity}
+  .portrait .frame{clip-path:inset(100% 0 0 0);animation:unveil 1.4s var(--ease-in-out) .35s forwards;background:#0b1422}
+  .portrait .tilt{height:100%}
+  .portrait .offset{opacity:0;animation:fade 1s ease 1.4s forwards}
+  .portrait .tick{opacity:0;animation:fade .8s ease 1.7s forwards}
   @keyframes unveil{to{clip-path:inset(0 0 0 0)}}
-  .portrait .frame{width:100%;height:100%;animation:drift 16s ease-in-out 2s infinite alternate}
-  .portrait img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;transform:scale(1.14);animation:settle 1.8s var(--ease) .35s forwards}
+  .portrait .frame{width:100%;height:100%}
+  .portrait .frame img{animation:settle 1.8s var(--ease) .35s forwards,drift 16s ease-in-out 2.2s infinite alternate}
+  .portrait img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;transform:scale(1.14)}
   @keyframes settle{to{transform:scale(1)}}
   @keyframes drift{from{transform:scale(1)}to{transform:scale(1.045) translate(-1.2%,1%)}}
+  .portrait .frame{overflow:hidden;border-radius:2px}
   .portrait figcaption{position:absolute;left:0;right:0;bottom:0;padding:.8rem 1rem;font-size:.82rem;color:rgba(246,244,239,.85);background:linear-gradient(to top,rgba(11,20,34,.85),rgba(11,20,34,0));opacity:0;animation:fade 1s ease 1.3s forwards}
   @keyframes fade{to{opacity:1}}
   .rise{opacity:0;transform:translateY(26px);filter:blur(10px);animation:rise 1.2s var(--ease) forwards}
@@ -420,7 +483,7 @@
   @media (max-width:900px){
     .three,.games,.channels{grid-template-columns:1fr 1fr}
     .record-grid{grid-template-columns:1fr}
-    .pane{display:none}
+    .pane,.record-grid > .framed{display:none}
     .ledger-img{display:block;margin:0 0 1.25rem;aspect-ratio:16/10;overflow:hidden;border-radius:2px}
     .ledger-img img{width:100%;height:100%;object-fit:cover}
   }
@@ -446,7 +509,10 @@
     .card.tall{width:60vw;scroll-snap-align:start}
     .card.tall .ph{aspect-ratio:3/4}
     .moments .ctrl .btn,.moments .hint{display:none}
-    .ring,.aurora,.ghost.br,.rail-nav,.constellation,.dragcur,.dotfield{display:none}
+    .ring,.orbit,.aurora,.ghost.br,.rail-nav,.constellation,.dragcur,.dotfield{display:none}
+    .journey ol{grid-template-columns:1fr 1fr}.journey .line{display:none}.journey li{padding-left:1.4rem;padding-top:0}.journey li::before{top:.35rem}.journey li::after{top:calc(.35rem + 4px)}
+    .framed .offset{translate:10px 10px}
+    .aside-photo{margin-bottom:1.8rem}
     .track:hover{cursor:grab}
     .numbers .grid{grid-template-columns:1fr 1fr}
     .courses,.strengths{grid-template-columns:1fr}
@@ -454,7 +520,8 @@
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .rise,.portrait,.portrait .frame,.portrait img,.portrait figcaption,.hero .cue,.hero .cue::after{animation:none;opacity:1;transform:none;filter:none;clip-path:none}
+    .rise,.portrait,.portrait .frame,.portrait img,.portrait figcaption,.portrait .offset,.portrait .tick,.hero .cue,.hero .cue::after{animation:none;opacity:1;transform:none;filter:none;clip-path:none}
+    .portrait .offset{opacity:.75}
     .reveal{opacity:1;transform:none;filter:none;transition:none}
     section + section::before{transform:none;transition:none}
     .statement .w{opacity:1;transform:none;transition:none}
@@ -462,6 +529,8 @@
     .rules .body,.rules .body-in,.ledger li,.games > div,.contact a::after,.rules summary .plus{transition:none}
     .progress,.hero .cue{display:none}
     .orb,.ring,.aurora,.star,.hairline::before,.ghost,.warm,.meteor,.sparkle{animation:none}
+    .framed .tilt,[data-tilt]{transition:none;transform:none !important}
+    .journey .line i{transform:none;transition:none}.journey li{opacity:1;transform:none;transition:none}
     .meteor,.sparkle,.burst,.dragcur{display:none}
     .sec-head.in h2,.moments .head.in h2{animation:none;background:none;color:var(--h)}
     .intro{display:none}
@@ -473,13 +542,14 @@
   /* ---------- print: a clean CV ---------- */
   @media print{
     body{background:#fff;color:#000;font-size:11pt}
-    body::before,.progress,.intro,.rail-nav,.totop,.orb,.ring,.constellation,.meteor,.burst,.sparkle,.dragcur,.dotfield,.moments .count,.aurora,.stars,.spot,.hairline,.ghost,.warm,.cue,.lb,.toast,.copy,.moments .ctrl,.statement .src,.ledger-img{display:none !important}
+    body::before,.progress,.intro,.rail-nav,.totop,.orb,.ring,.orbit,.constellation,.framed .offset,.framed .tick,.framed .glare,.framed .plate,.journey .line,.meteor,.burst,.sparkle,.dragcur,.dotfield,.moments .count,.aurora,.stars,.spot,.hairline,.ghost,.warm,.cue,.lb,.toast,.copy,.moments .ctrl,.statement .src,.ledger-img{display:none !important}
     .hero{position:static;height:auto;background:#fff;color:#000;padding:0 0 1.5rem}
-    .hero-copy,.portrait{opacity:1 !important;transform:none !important}
+    .hero-copy,.portrait,.framed .tilt,[data-tilt]{opacity:1 !important;transform:none !important}
+    .journey li{opacity:1;transform:none}.journey ol{grid-template-columns:repeat(5,1fr)}
     .statement p{max-width:none}
     .hero .wrap{grid-template-columns:1fr 200px;align-items:start}
     .hero h1{font-size:28pt;color:#000}.hero .role,.hero .motto,.hero .kicker{color:#333;border-color:#ccc}
-    .portrait{clip-path:none;animation:none;max-height:260px;aspect-ratio:4/5}.portrait img{transform:none;animation:none}.portrait figcaption{display:none}
+    .portrait{max-height:260px;aspect-ratio:4/5}.portrait .frame{clip-path:none;animation:none}.portrait img{transform:none;animation:none}.portrait figcaption{display:none}
     .page{box-shadow:none;background:#fff}
     section{padding:1.2rem 0;break-inside:avoid-page}
     section + section::before{transform:none;background:#ddd}
@@ -521,7 +591,7 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
-  <div class="aurora" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div><div class="stars" data-stars="34" data-meteors aria-hidden="true"></div><div class="ring r2" aria-hidden="true"></div><div class="ring" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div><div class="stars" data-stars="34" data-meteors aria-hidden="true"></div><div class="ring r2" aria-hidden="true"></div><div class="orbit" aria-hidden="true"><div class="ring"></div></div>
   <svg class="constellation" viewBox="0 0 400 300" aria-hidden="true">
     <polyline points="40,60 110,40 170,95 240,70 300,130 350,110" />
     <polyline points="170,95 150,180 210,230 280,205" />
@@ -535,9 +605,14 @@
       <p class="role rise">Instructor, College of Computer Studies<br>University of Cebu – Banilad Campus</p>
       <p class="motto rise">Strict on standards. Reasonable with people.</p>
     </div>
-    <figure class="portrait">
-      <div class="frame"><img src="images/portrait.jpg" alt="John Michael Eborda holding a certificate of appreciation, smiling." fetchpriority="high"></div>
-      <figcaption>Call me Sir Michael.</figcaption>
+    <figure class="portrait framed" data-framed>
+      <div class="tilt">
+        <div class="offset" aria-hidden="true"></div>
+        <div class="frame"><img src="images/portrait.jpg" alt="John Michael Eborda holding a certificate of appreciation, smiling." fetchpriority="high"></div>
+        <i class="tick tl" aria-hidden="true"></i><i class="tick tr" aria-hidden="true"></i><i class="tick bl" aria-hidden="true"></i><i class="tick br" aria-hidden="true"></i>
+        <div class="glare" aria-hidden="true"></div>
+        <figcaption>Call me Sir Michael.</figcaption>
+      </div>
     </figure>
   </div>
   <div class="cue" aria-hidden="true"></div>
@@ -557,6 +632,15 @@
       <p class="reveal" style="--d:.3s">That's where I learned what I now ask of you: show up prepared, own your work, and ask when you're stuck. I'll hold you to a high bar, and I'll be fair about it.</p>
     </div>
     <div>
+      <figure class="framed on-light reveal" data-framed style="--d:.15s;margin:0">
+        <div class="tilt">
+          <div class="offset" aria-hidden="true"></div>
+          <div class="aside-photo"><img src="images/grad-sea.jpg" alt="John Michael in graduation gown by the sea, holding his diploma." loading="lazy" style="object-position:50% 62%"></div>
+          <i class="tick tl" aria-hidden="true"></i><i class="tick tr" aria-hidden="true"></i><i class="tick bl" aria-hidden="true"></i><i class="tick br" aria-hidden="true"></i>
+          <div class="glare" aria-hidden="true"></div>
+        </div>
+      </figure>
+      <p class="aside-cap reveal" style="--d:.2s">Graduation week, 2026. Cap off, diploma in hand.</p>
       <ul class="facts reveal" style="--d:.25s" aria-label="At a glance">
         <li class="reveal" style="--d:.30s"><strong>Cum Laude</strong><span>Top 4 overall</span></li>
         <li class="reveal" style="--d:.36s"><strong>Dean's Lister</strong><span>every semester</span></li>
@@ -609,27 +693,27 @@
     </div>
     <p class="tools-l reveal" style="--d:.05s">Courses I handle this semester</p>
     <div class="courses">
-      <div class="reveal" style="--d:.10s" data-glow>
+      <div class="reveal" style="--d:.10s" data-glow data-tilt>
         <h3>Introduction to Computing</h3>
         <p>How computers, data, and the internet actually work, and the habits that make you good at using them.</p>
       </div>
-      <div class="reveal" style="--d:.18s" data-glow>
+      <div class="reveal" style="--d:.18s" data-glow data-tilt>
         <h3>Computer Programming 1</h3>
         <p>Your first real code: variables, control flow, functions, and the discipline of making a program do exactly what you meant.</p>
       </div>
-      <div class="reveal" style="--d:.26s" data-glow>
+      <div class="reveal" style="--d:.26s" data-glow data-tilt>
         <h3>Computer Programming 2</h3>
         <p>Building on the basics: data structures, objects, and writing programs that other people can read and maintain.</p>
       </div>
-      <div class="reveal" style="--d:.34s" data-glow>
+      <div class="reveal" style="--d:.34s" data-glow data-tilt>
         <h3>Information Management (DBSYS 1)</h3>
         <p>Relational design and SQL, from your first SELECT to a schema you can defend. My favourite language, so expect a lot of queries.</p>
       </div>
-      <div class="reveal" style="--d:.42s" data-glow>
+      <div class="reveal" style="--d:.42s" data-glow data-tilt>
         <h3>Testing &amp; Quality Assurance</h3>
         <p>How to break software on purpose, prove it works, and design for the person who has to use it. One of the subjects I enjoy most.</p>
       </div>
-      <div class="reveal" style="--d:.50s" data-glow>
+      <div class="reveal" style="--d:.50s" data-glow data-tilt>
         <h3>The Entrepreneurial Mind</h3>
         <p>Less theory, more pitching. You will build and present an idea, the same way I did in competition.</p>
       </div>
@@ -664,6 +748,15 @@
       <div class="reveal" style="--d:.22s"><h3>Approachable</h3><p>You can ask questions and raise legitimate concerns — about a lesson, a grade, or a situation you're in.</p></div>
       <div class="reveal" style="--d:.34s"><h3>Accountable</h3><p>I expect you to take responsibility for your learning. I'll take responsibility for how well I teach it.</p></div>
     </div>
+    <figure class="framed on-light reveal" data-framed style="margin:0">
+      <div class="tilt">
+        <div class="offset" aria-hidden="true"></div>
+        <div class="wide"><img src="images/asa-group.jpg" alt="A large group of Academic Scholars Alliance members in a classroom." loading="lazy"></div>
+        <i class="tick tl" aria-hidden="true"></i><i class="tick tr" aria-hidden="true"></i><i class="tick bl" aria-hidden="true"></i><i class="tick br" aria-hidden="true"></i>
+        <div class="glare" aria-hidden="true"></div>
+      </div>
+    </figure>
+    <p class="wide-cap reveal">The Academic Scholars Alliance, back when I was the one being addressed. I know what it's like to sit on that side of the room.</p>
     <blockquote class="quote reveal">
       "I will respect you as students, and I expect the same in return."
       <cite>What I say on the first day of every class</cite>
@@ -766,14 +859,31 @@
       <h2>Track record</h2>
       <p>What I did before I started asking you to do the same.</p>
     </div>
+    <div class="journey reveal" data-journey>
+      <div class="line" aria-hidden="true"><i></i></div>
+      <ol>
+        <li><div class="y">2022</div><p class="m">Enters the Alliance as Department Representative. First Dean's List.</p></li>
+        <li><div class="y">2023</div><p class="m">President of the Alliance, Chair of the Council of Presidents, Class Mayor.</p></li>
+        <li><div class="y">2024</div><p class="m">Most Outstanding Project. Dean's List, still every semester.</p></li>
+        <li><div class="y">2025</div><p class="m">Capstone Project Manager. Champion and Best in Booth at the first CCS Exhibit.</p></li>
+        <li><div class="y">2026</div><p class="m">ICETT Seoul, LAMBO champion, InnovateCebu 2nd, Cum Laude Top 4. Then the faculty.</p></li>
+      </ol>
+    </div>
     <div class="record-grid">
-      <div class="pane reveal" aria-hidden="true">
+      <div class="framed on-light reveal" data-framed style="position:sticky;top:5rem">
+      <div class="tilt">
+        <div class="offset" aria-hidden="true"></div>
+        <div class="pane" aria-hidden="true" style="position:relative;top:auto">
         <img src="images/grad-diploma.jpg" alt="" data-for="honors" loading="lazy">
         <img src="images/hinirang.jpg" alt="" data-for="leadership" loading="lazy">
         <img src="images/lambo-check.jpg" alt="" data-for="competitions" loading="lazy">
         <img src="images/papaya-field.jpg" alt="" data-for="research" loading="lazy">
         <img src="images/medals.jpg" alt="" data-for="service" loading="lazy">
         <div class="cap"><span data-cap></span></div>
+        </div>
+        <i class="tick tl" aria-hidden="true"></i><i class="tick tr" aria-hidden="true"></i><i class="tick bl" aria-hidden="true"></i><i class="tick br" aria-hidden="true"></i>
+        <div class="glare" aria-hidden="true"></div>
+      </div>
       </div>
 
       <div>
@@ -897,9 +1007,9 @@
       <p>I take games about as seriously as I take deadlines. Current standings, for anyone who wants to compare.</p>
     </div>
     <div class="games reveal">
-      <div class="reveal" style="--d:.15s" data-glow><div class="game">Mobile Legends</div><div class="rank">Mythical Immortal</div><div class="srv">Ranked</div></div>
-      <div class="reveal" style="--d:.27s" data-glow><div class="game">Genshin Impact</div><div class="rank">World Level 10, AR 60</div><div class="srv">Max adventure rank</div></div>
-      <div class="reveal" style="--d:.39s" data-glow><div class="game">Cookie Run: Kingdom</div><div class="rank">Top 12</div><div class="srv">Dark Cacao server</div></div>
+      <div class="reveal" style="--d:.15s" data-glow data-tilt><div class="game">Mobile Legends</div><div class="rank">Mythical Immortal</div><div class="srv">Ranked</div></div>
+      <div class="reveal" style="--d:.27s" data-glow data-tilt><div class="game">Genshin Impact</div><div class="rank">World Level 10, AR 60</div><div class="srv">Max adventure rank</div></div>
+      <div class="reveal" style="--d:.39s" data-glow data-tilt><div class="game">Cookie Run: Kingdom</div><div class="rank">Top 12</div><div class="srv">Dark Cacao server</div></div>
     </div>
   </div>
 </section>
@@ -921,10 +1031,10 @@
       <p>Use the right channel and you'll get a faster answer.</p>
     </div>
     <div class="channels reveal">
-      <div class="reveal" style="--d:.15s"><div class="what">Announcements</div><div class="where">Class group or LMS</div></div>
-      <div class="reveal" style="--d:.27s"><div class="what">Submissions</div><div class="where">LMS or designated platform</div></div>
-      <div class="reveal" style="--d:.39s"><div class="what">Academic questions</div><div class="where">In class or consultation</div></div>
-      <div class="reveal" style="--d:.51s"><div class="what">Personal concerns</div><div class="where">Private message or email</div></div>
+      <div class="reveal" style="--d:.15s" data-tilt><div class="what">Announcements</div><div class="where">Class group or LMS</div></div>
+      <div class="reveal" style="--d:.27s" data-tilt><div class="what">Submissions</div><div class="where">LMS or designated platform</div></div>
+      <div class="reveal" style="--d:.39s" data-tilt><div class="what">Academic questions</div><div class="where">In class or consultation</div></div>
+      <div class="reveal" style="--d:.51s" data-tilt><div class="what">Personal concerns</div><div class="where">Private message or email</div></div>
     </div>
     <div class="contact reveal" style="--d:.5s">
       <div><a href="mailto:johnmichaeleborda79@gmail.com">johnmichaeleborda79@gmail.com</a><button class="copy" type="button" data-copy="johnmichaeleborda79@gmail.com"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
@@ -957,6 +1067,32 @@
   var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var narrow = function(){ return window.innerWidth <= 720; };
   var clamp = function(v,a,b){ return Math.max(a, Math.min(b, v)); };
+
+  /* 3D: framed photos and tiles follow the cursor */
+  if (!rm) {
+    var tiltOf = function(el, e, max){
+      var r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      return { rx: (py - .5) * -2 * max, ry: (px - .5) * 2 * max, px: px * 100, py: py * 100 };
+    };
+    document.querySelectorAll('[data-framed]').forEach(function(f){
+      var t = f.querySelector('.tilt'), g = f.querySelector('.glare');
+      f.addEventListener('pointermove', function(e){
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        var v = tiltOf(f, e, 6);
+        t.style.transform = 'rotateX(' + v.rx + 'deg) rotateY(' + v.ry + 'deg)';
+        if (g){ g.style.setProperty('--gx', v.px + '%'); g.style.setProperty('--gy', v.py + '%'); }
+      });
+      f.addEventListener('pointerleave', function(){ t.style.transform = ''; });
+    });
+    document.querySelectorAll('[data-tilt]').forEach(function(el){
+      el.addEventListener('pointermove', function(e){
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        var v = tiltOf(el, e, 5);
+        el.style.transform = 'perspective(900px) rotateX(' + v.rx + 'deg) rotateY(' + v.ry + 'deg) translateZ(6px)';
+      });
+      el.addEventListener('pointerleave', function(){ el.style.transform = ''; });
+    });
+  }
 
   /* meteors: occasional shooting stars in any [data-meteors] field */
   if (!rm) document.querySelectorAll('[data-meteors]').forEach(function(box){
