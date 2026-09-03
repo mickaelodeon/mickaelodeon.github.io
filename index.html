@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meet your instructor — John Michael Eborda</title>
+<meta name="description" content="Who your instructor is, how he teaches, and what he expects. John Michael Eborda, College of Computer Studies, University of Cebu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1A2B; --ink-2:#172538;
+    --paper:#F6F4EF; --paper-2:#EDE9E1;
+    --text:#1B2230; --muted:#5F6979;
+    --brass:#B08A33; --brass-ink:#D9B65C;
+    --line:rgba(15,26,43,.14); --line-ink:rgba(246,244,239,.16);
+    --display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --sans:"Manrope","Segoe UI",system-ui,-apple-system,sans-serif;
+    --measure:62ch;
+    --ease:cubic-bezier(.2,.7,.2,1); --ease-in-out:cubic-bezier(.7,0,.2,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+  a:hover{color:var(--brass)}
+  :focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px}
+  h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.05;letter-spacing:-.015em}
+  h2{font-size:clamp(2rem,3.6vw,2.9rem);font-variation-settings:"opsz" 72,"SOFT" 30}
+  h3{font-size:1.35rem;font-variation-settings:"opsz" 36}
+  p{margin:0 0 1em;max-width:var(--measure)}
+  .lede{font-size:1.2rem;line-height:1.55}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,56px);position:relative;z-index:1}
+  section{padding:clamp(4.5rem,9vw,7.5rem) 0;position:relative}
+  section + section::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--line);transform:scaleX(0);transform-origin:left;transition:transform 1.4s var(--ease-in-out)}
+  section.in::before{transform:scaleX(1)}
+  .sec-head{margin-bottom:clamp(2rem,4vw,3.5rem)}
+  .sec-head p{margin:1rem 0 0;font-size:1.05rem;color:var(--muted)}
+
+  /* ---------- texture + ambient shapes ---------- */
+  body::before{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.055;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:220px 220px}
+  .orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px);opacity:.55;will-change:transform}
+  .orb.a{width:46vw;height:46vw;max-width:640px;max-height:640px;left:-12vw;top:-18vw;background:radial-gradient(closest-side,rgba(217,182,92,.22),transparent 70%);animation:orbA 26s ease-in-out infinite alternate}
+  .orb.b{width:40vw;height:40vw;max-width:560px;max-height:560px;right:-10vw;bottom:-14vw;background:radial-gradient(closest-side,rgba(120,150,210,.20),transparent 70%);animation:orbB 32s ease-in-out infinite alternate}
+  @keyframes orbA{from{transform:translate(0,0)}to{transform:translate(9vw,7vw)}}
+  @keyframes orbB{from{transform:translate(0,0)}to{transform:translate(-8vw,-9vw)}}
+  .ring{position:absolute;right:6vw;top:50%;width:min(64vmin,620px);aspect-ratio:1;margin-top:calc(min(64vmin,620px) / -2);border:1px solid rgba(217,182,92,.22);border-radius:50%;pointer-events:none;animation:spin 80s linear infinite}
+  .ring::after{content:"";position:absolute;left:50%;top:-3px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--brass-ink);box-shadow:0 0 14px rgba(217,182,92,.8)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .spot{position:absolute;inset:0;pointer-events:none;background:radial-gradient(520px circle at var(--mx,70%) var(--my,40%),rgba(217,182,92,.10),transparent 60%);transition:opacity .6s;opacity:0}
+  .hero:hover .spot{opacity:1}
+  .hairline{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;overflow:hidden}
+  .hairline::before{content:"";position:absolute;left:-10%;top:0;width:120%;height:1px;background:linear-gradient(90deg,transparent,rgba(176,138,51,.35),transparent);transform:rotate(-7deg);top:22%}
+  .hairline::after{content:"";position:absolute;left:-10%;width:120%;height:1px;background:linear-gradient(90deg,transparent,rgba(15,26,43,.16),transparent);transform:rotate(-7deg);top:78%}
+
+  /* aurora: slow rotating colour wash, dark sections only */
+  .aurora{position:absolute;left:50%;top:50%;width:140vmax;height:140vmax;margin:-70vmax 0 0 -70vmax;pointer-events:none;opacity:.9;
+    background:conic-gradient(from 0deg,transparent 0 12%,rgba(217,182,92,.10) 22%,transparent 34%,rgba(120,150,210,.11) 48%,transparent 60%,rgba(150,110,180,.08) 72%,transparent 84%);
+    filter:blur(70px);animation:spin 90s linear infinite;will-change:transform}
+  .aurora.slow{animation-duration:140s;animation-direction:reverse}
+  /* second, larger ring — counter-rotating */
+  .ring.r2{width:min(92vmin,900px);margin-top:calc(min(92vmin,900px) / -2);right:calc(6vw - min(14vmin,140px));border-color:rgba(217,182,92,.10);animation:spin 140s linear infinite reverse}
+  .ring.r2::after{width:4px;height:4px;margin-left:-2px;top:-2px;background:rgba(217,182,92,.7);box-shadow:0 0 10px rgba(217,182,92,.6)}
+  /* stars: tiny brass points that twinkle */
+  .stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .star{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(246,244,239,.9);opacity:0;animation:twinkle var(--t,6s) ease-in-out var(--dl,0s) infinite}
+  .star.g{background:var(--brass-ink);box-shadow:0 0 6px rgba(217,182,92,.8)}
+  @keyframes twinkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:var(--o,.8);transform:scale(1)}}
+  /* hairlines now carry a slow light sweep */
+  .hairline::before{background:linear-gradient(90deg,transparent 0%,rgba(176,138,51,.22) 30%,rgba(176,138,51,.9) 50%,rgba(176,138,51,.22) 70%,transparent 100%);background-size:40% 100%;background-repeat:no-repeat;background-position:-40% 0;animation:sweep 9s var(--ease-in-out) infinite}
+  @keyframes sweep{0%{background-position:-40% 0}60%,100%{background-position:140% 0}}
+  /* ghost ring for light sections */
+  .ghost{position:absolute;pointer-events:none;border:1px solid rgba(176,138,51,.16);border-radius:50%;aspect-ratio:1;animation:spin 120s linear infinite}
+  .ghost::after{content:"";position:absolute;left:50%;top:-3px;width:5px;height:5px;margin-left:-2px;border-radius:50%;background:var(--brass)}
+  .ghost.tl{width:min(50vmin,480px);left:-14vmin;top:-10vmin}
+  .ghost.br{width:min(70vmin,680px);right:-22vmin;bottom:-30vmin;animation-direction:reverse}
+  .warm{position:absolute;pointer-events:none;border-radius:50%;filter:blur(70px);width:50vw;height:50vw;max-width:700px;max-height:700px;background:radial-gradient(closest-side,rgba(217,182,92,.14),transparent 70%);animation:orbA 30s ease-in-out infinite alternate}
+  /* back to top: ring fills with scroll */
+  .totop{position:fixed;right:22px;bottom:22px;z-index:70;width:52px;height:52px;border-radius:50%;border:0;background:rgba(15,26,43,.85);color:var(--paper);cursor:pointer;display:grid;place-items:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .5s var(--ease),transform .5s var(--ease),background .3s;backdrop-filter:blur(8px)}
+  .totop.show{opacity:1;transform:none;pointer-events:auto}
+  .totop:hover{background:var(--ink-2)}
+  .totop .dial{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+  .totop circle{fill:none;stroke-width:1.5}
+  .totop .bg{stroke:rgba(246,244,239,.15)}
+  .totop .fg{stroke:var(--brass-ink);stroke-dasharray:150.8;stroke-dashoffset:150.8;transition:stroke-dashoffset .2s linear}
+  .totop .arrow{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;position:relative}
+  /* finale */
+  .finale{position:relative;background:var(--ink);overflow:hidden;z-index:1}
+  .finale .reach{background:transparent}
+  .finale footer{background:transparent;position:relative;z-index:1}
+  .finale .ring.r3{right:auto;left:-18vmin;top:auto;bottom:-34vmin;margin:0;width:min(80vmin,760px);animation-duration:110s}
+  .finale .sign{font-size:clamp(2rem,4.4vw,3.6rem);font-variation-settings:"opsz" 96,"SOFT" 30;letter-spacing:-.02em;line-height:1.1}
+  .finale .sign span{display:block;opacity:0;transform:translateY(20px);filter:blur(6px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease)}
+  .finale .sign.in span{opacity:1;transform:none;filter:none}
+  .finale .sign span:nth-child(2){transition-delay:.25s}.finale .sign span:nth-child(3){transition-delay:.5s}
+  .finale footer .inner{padding-top:3rem;padding-bottom:3rem;align-items:flex-end}
+  .finale .thin{margin-top:5rem;text-align:center;font-size:.8rem;color:rgba(246,244,239,.35);position:relative;z-index:1}
+
+  .progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--brass);transform:scaleX(0);transform-origin:left;z-index:50;pointer-events:none}
+
+  /* ---------- hero (pinned; the page slides over it) ---------- */
+  .hero{position:sticky;top:0;height:100vh;height:100svh;background:var(--ink);color:var(--paper);overflow:hidden;z-index:1;display:flex;align-items:center}
+  .hero::after{content:"";position:absolute;right:-10%;bottom:-30%;width:60vw;max-width:760px;aspect-ratio:1;background:radial-gradient(closest-side,rgba(217,182,92,.14),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,5rem);align-items:center;position:relative;z-index:1;width:100%}
+  .hero-copy{will-change:transform,opacity}
+  .hero .kicker{font-size:.95rem;color:var(--brass-ink);margin:0 0 1.5rem}
+  .hero h1{font-size:clamp(3rem,7.6vw,6.6rem);font-variation-settings:"opsz" 144,"SOFT" 40;letter-spacing:-.03em;line-height:.95;text-wrap:balance}
+  .hero h1 em{font-style:italic;font-weight:300}
+  .hero .role{margin:1.75rem 0 0;font-size:1.05rem;color:rgba(246,244,239,.78);max-width:34ch}
+  .hero .motto{margin:2.5rem 0 0;padding-top:1.5rem;border-top:1px solid var(--line-ink);font-family:var(--display);font-size:clamp(1.2rem,2vw,1.55rem);font-variation-settings:"opsz" 48;max-width:28ch;line-height:1.3}
+  .hero .cue{position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);width:1px;height:56px;background:linear-gradient(to bottom,transparent,rgba(246,244,239,.6));opacity:0;animation:fade 1s ease 1.8s forwards}
+  .hero .cue::after{content:"";position:absolute;left:-2px;top:0;width:5px;height:5px;border-radius:50%;background:var(--brass-ink);animation:drop 2.2s var(--ease-in-out) infinite}
+  @keyframes drop{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(52px);opacity:0}}
+  .portrait{margin:0;position:relative;aspect-ratio:4/4.8;max-height:78vh;overflow:hidden;border-radius:2px;background:#0b1422;will-change:transform,opacity;clip-path:inset(100% 0 0 0);animation:unveil 1.4s var(--ease-in-out) .35s forwards}
+  @keyframes unveil{to{clip-path:inset(0 0 0 0)}}
+  .portrait .frame{width:100%;height:100%;animation:drift 16s ease-in-out 2s infinite alternate}
+  .portrait img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;transform:scale(1.14);animation:settle 1.8s var(--ease) .35s forwards}
+  @keyframes settle{to{transform:scale(1)}}
+  @keyframes drift{from{transform:scale(1)}to{transform:scale(1.045) translate(-1.2%,1%)}}
+  .portrait figcaption{position:absolute;left:0;right:0;bottom:0;padding:.8rem 1rem;font-size:.82rem;color:rgba(246,244,239,.85);background:linear-gradient(to top,rgba(11,20,34,.85),rgba(11,20,34,0));opacity:0;animation:fade 1s ease 1.3s forwards}
+  @keyframes fade{to{opacity:1}}
+  .rise{opacity:0;transform:translateY(26px);filter:blur(10px);animation:rise 1.2s var(--ease) forwards}
+  .rise:nth-child(1){animation-delay:.15s}.rise:nth-child(2){animation-delay:.3s}.rise:nth-child(3){animation-delay:.5s}.rise:nth-child(4){animation-delay:.68s}
+  @keyframes rise{to{opacity:1;transform:none;filter:blur(0)}}
+
+  /* everything after the hero rides on top of it */
+  .page{position:relative;z-index:2;background:var(--paper);box-shadow:0 -30px 80px rgba(0,0,0,.35)}
+
+  .reveal{opacity:0;transform:translateY(24px);filter:blur(8px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:var(--d,0s)}
+  .reveal.in{opacity:1;transform:none;filter:blur(0)}
+
+  /* ---------- who ---------- */
+  .two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+  .facts{border-top:1px solid var(--line);margin:0;padding:0;list-style:none}
+  .facts li{display:flex;justify-content:space-between;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
+  .facts li span:last-child{color:var(--muted);text-align:right;white-space:nowrap}
+  .facts strong{font-weight:600}
+
+  /* ---------- statement (scroll-linked word reveal) ---------- */
+  .statement{padding:0;height:230vh;background:var(--ink);color:var(--paper)}
+  .statement::before{display:none}
+  .statement .pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
+  .statement .pin::before{content:"";position:absolute;left:-20%;top:-40%;width:70vw;aspect-ratio:1;background:radial-gradient(closest-side,rgba(217,182,92,.10),transparent 70%);pointer-events:none}
+  .statement p{margin:0;max-width:22ch;font-family:var(--display);font-size:clamp(2rem,5.2vw,4.6rem);font-variation-settings:"opsz" 120,"SOFT" 30;line-height:1.12;letter-spacing:-.02em}
+  .statement .w{display:inline-block;opacity:.18;transform:translateY(.15em);transition:opacity .35s ease,transform .5s var(--ease);will-change:opacity,transform}
+  .statement .w.on{opacity:1;transform:none}
+  .statement .w.gold{color:var(--brass-ink)}
+  .statement .src{margin-top:2.5rem;font-family:var(--sans);font-size:.9rem;color:rgba(246,244,239,.45)}
+
+  /* ---------- teach ---------- */
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3.5rem)}
+  .three h3{margin-bottom:.6rem}.three p{margin:0;color:var(--muted)}
+  .quote{margin:clamp(2.5rem,5vw,4rem) 0 0;padding:1.75rem 0 0;border-top:1px solid var(--line);font-family:var(--display);font-size:clamp(1.3rem,2.2vw,1.7rem);font-variation-settings:"opsz" 48;line-height:1.3;max-width:40ch}
+  .quote cite{display:block;font-family:var(--sans);font-style:normal;font-size:.9rem;color:var(--muted);margin-top:.75rem}
+  .agreement{margin-top:clamp(2.5rem,5vw,4rem);width:100%;border-collapse:collapse}
+  .agreement th{text-align:left;font-weight:600;font-size:.95rem;padding:0 0 .75rem;border-bottom:1px solid var(--text)}
+  .agreement td{padding:.8rem 0;border-bottom:1px solid var(--line);vertical-align:top;width:50%}
+  .agreement td:first-child{padding-right:2rem}
+  .agreement td:last-child,.agreement th:last-child{padding-left:2rem;border-left:1px solid var(--line)}
+
+  /* ---------- rules ---------- */
+  .rules{border-top:1px solid var(--line)}
+  .rules details{border-bottom:1px solid var(--line)}
+  .rules summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:3ch 1fr auto;gap:1.25rem;align-items:baseline;padding:1.15rem 0;font-family:var(--display);font-size:1.3rem;font-variation-settings:"opsz" 36;transition:color .3s}
+  .rules summary:hover{color:var(--brass)}
+  .rules summary::-webkit-details-marker{display:none}
+  .rules summary .n{font-family:var(--sans);font-size:.85rem;color:var(--brass);font-weight:600;font-variant-numeric:tabular-nums}
+  .rules summary .plus{width:1.35rem;height:1.35rem;position:relative;align-self:center;transition:transform .3s var(--ease)}
+  .rules summary .plus::before,.rules summary .plus::after{content:"";position:absolute;background:var(--text);left:50%;top:50%;transform:translate(-50%,-50%)}
+  .rules summary .plus::before{width:100%;height:1.5px}.rules summary .plus::after{width:1.5px;height:100%}
+  .rules details[open] summary .plus{transform:rotate(45deg)}
+  .rules .body{padding-left:calc(3ch + 1.25rem);max-width:64ch;overflow:hidden;height:0;transition:height .55s var(--ease-in-out)}
+  .rules details[open] .body{height:auto}
+  .rules .body-in{padding-bottom:1.5rem;opacity:0;transform:translateY(-6px);transition:opacity .5s ease .15s,transform .5s var(--ease) .15s}
+  .rules details[open] .body-in{opacity:1;transform:none}
+  .rules .body p{margin:0 0 .6em}.rules .body ul{margin:.25rem 0 .75rem;padding-left:1.1rem}.rules .body li{margin:.2rem 0}
+  .rules .body .note{color:var(--muted);font-size:.95rem}
+
+  /* ---------- record: sticky photo pane + ledgers ---------- */
+  .record-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.35fr);gap:clamp(2rem,5vw,5rem);align-items:start}
+  .pane{position:sticky;top:5rem;aspect-ratio:4/5;overflow:hidden;border-radius:2px;background:var(--paper-2)}
+  .pane img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .9s var(--ease),transform 1.6s var(--ease)}
+  .pane img.on{opacity:1;transform:scale(1)}
+  .pane .cap{position:absolute;left:0;right:0;bottom:0;padding:1rem 1.1rem;color:var(--paper);font-size:.88rem;background:linear-gradient(to top,rgba(11,20,34,.8),rgba(11,20,34,0));min-height:5.5rem;display:flex;align-items:flex-end}
+  .pane .cap span{transition:opacity .5s ease}
+  .ledger{padding:2rem 0;border-top:1px solid var(--line)}
+  .ledger:first-of-type{border-top:0;padding-top:0}
+  .ledger h3{margin-bottom:1rem}
+  .ledger ul{list-style:none;margin:0;padding:0}
+  .ledger li{display:grid;grid-template-columns:1fr auto;gap:1.5rem;padding:.55rem 0;border-bottom:1px solid var(--line);align-items:baseline;transition:padding-left .4s var(--ease)}
+  .ledger li:hover{padding-left:.6rem}
+  .ledger li:last-child{border-bottom:0}
+  .ledger li .yr{font-size:.85rem;color:var(--brass);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;transition:color .4s}
+  .ledger li:hover .yr{color:var(--text)}
+  .ledger li .sub{display:block;color:var(--muted);font-size:.92rem}
+  .ledger-img{display:none}
+
+  /* ---------- moments: pinned horizontal gallery ---------- */
+  .moments{padding:0;background:var(--ink);color:var(--paper)}
+  .moments::before{display:none}
+  .moments .pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .moments .head{padding:0 clamp(20px,5vw,56px);margin-bottom:2rem}
+  .moments .head h2{color:var(--paper)}
+  .moments .head p{color:rgba(246,244,239,.65);margin:.75rem 0 0}
+  .track{display:flex;gap:clamp(1rem,2.5vw,2.25rem);padding:0 clamp(20px,5vw,56px);will-change:transform;perspective:1200px}
+  .card{flex:0 0 auto;width:min(58vw,560px);will-change:transform}
+  .card.tall{width:min(38vw,360px)}
+  .card .ph{aspect-ratio:4/3;overflow:hidden;border-radius:2px;background:#0b1422}
+  .card.tall .ph{aspect-ratio:3/4}
+  .card img{width:100%;height:100%;object-fit:cover}
+  .card figcaption{margin-top:.8rem;font-size:.92rem;color:rgba(246,244,239,.78);max-width:40ch;transition:color .4s}
+  .card{cursor:pointer;outline:none}
+  .card .ph img{transition:transform 1.1s var(--ease)}
+  .card:hover .ph img,.card:focus-visible .ph img{transform:scale(1.05)}
+  .card:hover figcaption{color:rgba(246,244,239,.95)}
+  .card:focus-visible .ph{box-shadow:0 0 0 2px var(--brass-ink)}
+  .track{cursor:grab;user-select:none;-webkit-user-select:none}
+  .track.dragging{cursor:grabbing}
+  .track.dragging .card .ph img{transition:none}
+  .moments .ctrl{display:flex;align-items:center;gap:1.25rem;padding:0 clamp(20px,5vw,56px);margin-top:2rem}
+  .moments .rail{flex:1;height:1px;background:var(--line-ink);position:relative;overflow:hidden}
+  .moments .rail i{position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--brass-ink);transform-origin:left;transform:scaleX(0)}
+  .moments .btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-ink);background:transparent;color:var(--paper);cursor:pointer;display:grid;place-items:center;transition:background .3s,border-color .3s,transform .3s var(--ease)}
+  .moments .btn:hover{background:rgba(246,244,239,.08);border-color:rgba(246,244,239,.4)}
+  .moments .btn:active{transform:scale(.94)}
+  .moments .btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+  .moments .hint{font-size:.85rem;color:rgba(246,244,239,.5);white-space:nowrap}
+
+  /* ---------- lightbox ---------- */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(8,14,26,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);opacity:0;pointer-events:none;transition:opacity .4s ease}
+  .lb.open{opacity:1;pointer-events:auto}
+  .lb img{max-width:100%;max-height:min(78vh,1100px);object-fit:contain;border-radius:2px;box-shadow:0 30px 90px rgba(0,0,0,.5);transform:scale(.96);transition:transform .5s var(--ease)}
+  .lb.open img{transform:scale(1)}
+  .lb figcaption{margin-top:1rem;color:rgba(246,244,239,.8);font-size:.95rem;text-align:center;max-width:60ch}
+  .lb figcaption b{display:block;color:var(--paper);font-weight:600}
+  .lb figure{margin:0;display:flex;flex-direction:column;align-items:center}
+  .lb .x,.lb .nav{position:absolute;width:48px;height:48px;border-radius:50%;border:1px solid rgba(246,244,239,.25);background:rgba(15,26,43,.6);color:var(--paper);cursor:pointer;display:grid;place-items:center;transition:background .3s,border-color .3s}
+  .lb .x:hover,.lb .nav:hover{background:rgba(246,244,239,.12);border-color:rgba(246,244,239,.6)}
+  .lb .x{top:20px;right:20px}
+  .lb .nav{top:50%;margin-top:-24px}.lb .nav.prev{left:20px}.lb .nav.next{right:20px}
+  .lb svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5}
+  .lb .count{position:absolute;top:32px;left:24px;font-size:.85rem;color:rgba(246,244,239,.6);font-variant-numeric:tabular-nums}
+  body.lb-open{overflow:hidden}
+  .card figcaption b{display:block;font-weight:600;color:var(--paper)}
+
+  /* ---------- games ---------- */
+  .games{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .games > div{background:var(--paper);padding:1.6rem 1.5rem;transition:background .5s var(--ease),transform .5s var(--ease)}
+  .games > div:hover{background:#fff;transform:translateY(-3px)}
+  .games .game{font-family:var(--display);font-size:1.3rem;font-variation-settings:"opsz" 36;margin-bottom:.35rem}
+  .games .rank{font-size:1.05rem;font-weight:600}.games .srv{color:var(--muted);font-size:.9rem;margin-top:.15rem}
+
+  /* ---------- reach ---------- */
+  .reach{background:var(--ink);color:var(--paper)}
+  .reach::before{background:var(--line-ink)}
+  .reach h2{color:var(--paper)}.reach .sec-head p{color:rgba(246,244,239,.7)}
+  .channels{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-ink);border:1px solid var(--line-ink)}
+  .channels > div{background:var(--ink);padding:1.5rem 1.4rem;transition:background .5s}
+  .channels > div:hover{background:var(--ink-2)}
+  .channels .what{font-size:.85rem;color:var(--brass-ink);margin-bottom:.45rem;font-weight:600}
+  .channels .where{font-family:var(--display);font-size:1.25rem;font-variation-settings:"opsz" 36;line-height:1.25}
+  .contact{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line-ink);display:grid;gap:.5rem}
+  .contact a{color:var(--paper);font-family:var(--display);font-size:1.35rem;font-variation-settings:"opsz" 36;text-decoration:none;width:fit-content}
+  .contact a::after{content:"";display:block;height:1px;background:var(--brass-ink);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-in-out)}
+  .contact a:hover{color:var(--paper)}.contact a:hover::after{transform:scaleX(1)}
+  .contact .hint{color:rgba(246,244,239,.6);font-size:.9rem}
+
+  footer{background:var(--ink);color:rgba(246,244,239,.6);padding:0 0 3rem}
+  footer .inner{border-top:1px solid var(--line-ink);padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.9rem}
+  footer .sign{font-family:var(--display);font-size:1.6rem;color:var(--paper);font-variation-settings:"opsz" 48;line-height:1.2}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .three,.games,.channels{grid-template-columns:1fr 1fr}
+    .record-grid{grid-template-columns:1fr}
+    .pane{display:none}
+    .ledger-img{display:block;margin:0 0 1.25rem;aspect-ratio:16/10;overflow:hidden;border-radius:2px}
+    .ledger-img img{width:100%;height:100%;object-fit:cover}
+  }
+  @media (max-width:720px){
+    .hero{height:auto;min-height:100svh;padding:3rem 0 4rem}
+    .hero .wrap{grid-template-columns:1fr}
+    .portrait{order:-1;max-width:300px;aspect-ratio:4/4.4;max-height:none}
+    .hero .cue{display:none}
+    .two{grid-template-columns:1fr}
+    .three,.games,.channels{grid-template-columns:1fr}
+    .agreement td:last-child,.agreement th:last-child{padding-left:1rem}.agreement td:first-child{padding-right:1rem}
+    .facts li span:last-child{white-space:normal}
+    .rules summary{font-size:1.15rem;grid-template-columns:2.5ch 1fr auto;gap:.9rem}
+    .rules .body{padding-left:0}
+    .statement{height:auto;padding:5rem 0}
+    .statement .pin{position:static;height:auto}
+    
+    .moments{padding:5rem 0}
+    .moments .pin{position:static;height:auto;overflow:visible}
+    .track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:1rem;perspective:none;scrollbar-width:none}
+    .track::-webkit-scrollbar{display:none}
+    .card{width:78vw;scroll-snap-align:start}
+    .card.tall{width:60vw;scroll-snap-align:start}
+    .card.tall .ph{aspect-ratio:3/4}
+    .moments .ctrl .btn,.moments .hint{display:none}
+    .ring,.aurora,.ghost.br{display:none}
+    .totop{right:14px;bottom:14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rise,.portrait,.portrait .frame,.portrait img,.portrait figcaption,.hero .cue,.hero .cue::after{animation:none;opacity:1;transform:none;filter:none;clip-path:none}
+    .reveal{opacity:1;transform:none;filter:none;transition:none}
+    section + section::before{transform:none;transition:none}
+    .statement .w{opacity:1;transform:none;transition:none}
+    .pane img{transition:none}
+    .rules .body,.rules .body-in,.ledger li,.games > div,.contact a::after,.rules summary .plus{transition:none}
+    .progress,.hero .cue{display:none}
+    .orb,.ring,.aurora,.star,.hairline::before,.ghost,.warm{animation:none}
+    .totop .fg{transition:none}
+    .finale .sign span{opacity:1;transform:none;filter:none;transition:none}
+    .card .ph img,.lb,.lb img{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="aurora" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div><div class="stars" data-stars="34" aria-hidden="true"></div><div class="ring r2" aria-hidden="true"></div><div class="ring" aria-hidden="true"></div><div class="spot" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="kicker rise">Meet your instructor</p>
+      <h1 class="rise">John Michael <em>Eborda</em></h1>
+      <p class="role rise">Instructor, College of Computer Studies<br>University of Cebu – Banilad Campus</p>
+      <p class="motto rise">Strict on standards. Reasonable with people.</p>
+    </div>
+    <figure class="portrait">
+      <div class="frame"><img src="images/portrait.jpg" alt="John Michael Eborda holding a certificate of appreciation, smiling." fetchpriority="high"></div>
+      <figcaption>Call me Sir Michael.</figcaption>
+    </figure>
+  </div>
+  <div class="cue" aria-hidden="true"></div>
+</header>
+
+<div class="page">
+<main>
+
+<!-- ================= WHO I AM ================= -->
+<section id="who">
+  <div class="ghost br" aria-hidden="true"></div><div class="warm" aria-hidden="true" style="left:-16vw;top:-10vw"></div>
+  <div class="wrap two">
+    <div>
+      <div class="sec-head reveal"><h2>Who I am</h2></div>
+      <p class="lede reveal" style="--d:.1s">I finished my BSIT here at UC's College of Computer Studies — Cum Laude, Top 4 of the batch — and joined the faculty right after. So not long ago, I was sitting where you are.</p>
+      <p class="reveal" style="--d:.2s">Before teaching, I interned with Lexmark's Global Business Services team, and I presented and published research at an international conference in Seoul while still a student. Most of college, though, I spent leading things: the Academic Scholars Alliance, the University Council of Presidents, my own class, and later our capstone team.</p>
+      <p class="reveal" style="--d:.3s">That's where I learned what I now ask of you: show up prepared, own your work, and ask when you're stuck. I'll hold you to a high bar, and I'll be fair about it.</p>
+    </div>
+    <div>
+      <ul class="facts reveal" style="--d:.25s" aria-label="At a glance">
+        <li class="reveal" style="--d:.30s"><strong>Cum Laude</strong><span>Top 4 overall</span></li>
+        <li class="reveal" style="--d:.36s"><strong>Dean's Lister</strong><span>every semester</span></li>
+        <li class="reveal" style="--d:.42s"><strong>Academic Scholar</strong><span>maintained to graduation</span></li>
+        <li class="reveal" style="--d:.48s"><strong>Outstanding IT Graduate</strong><span>UC CCS</span></li>
+        <li class="reveal" style="--d:.54s"><strong>IT Excellence Award</strong><span>UC CCS</span></li>
+        <li class="reveal" style="--d:.60s"><strong>Lexmark intern</strong><span>Global Business Services</span></li>
+        <li class="reveal" style="--d:.66s"><strong>Published researcher</strong><span>ICETT 2026, Seoul</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATEMENT (scroll-linked) ================= -->
+<section class="statement" id="statement" aria-label="What these experiences taught me">
+  <div class="pin">
+    <div class="aurora slow" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div><div class="stars" data-stars="26" aria-hidden="true"></div>
+    <div class="wrap">
+      <p data-words>These experiences taught me how to <span class="gold">learn</span>, <span class="gold">lead</span>, <span class="gold">fail</span>, <span class="gold">adapt</span>, and <span class="gold">solve problems</span>. That is what I want to teach you.</p>
+      <p class="src">Keep scrolling</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW I TEACH ================= -->
+<section id="teach">
+  <div class="hairline" aria-hidden="true"></div><div class="ghost tl" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>How I teach</h2>
+      <p>Three things you can count on from me, and a short agreement that goes both ways.</p>
+    </div>
+    <div class="three">
+      <div class="reveal" style="--d:.1s"><h3>Fair</h3><p>Same standards and expectations for everyone. Grades are earned against stated criteria, not given.</p></div>
+      <div class="reveal" style="--d:.22s"><h3>Approachable</h3><p>You can ask questions and raise legitimate concerns — about a lesson, a grade, or a situation you're in.</p></div>
+      <div class="reveal" style="--d:.34s"><h3>Accountable</h3><p>I expect you to take responsibility for your learning. I'll take responsibility for how well I teach it.</p></div>
+    </div>
+    <blockquote class="quote reveal">
+      "I will respect you as students, and I expect the same in return."
+      <cite>What I say on the first day of every class</cite>
+    </blockquote>
+    <table class="agreement reveal">
+      <thead><tr class="reveal" style="--d:.1s"><th scope="col">You can expect from me</th><th scope="col">I expect from you</th></tr></thead>
+      <tbody>
+        <tr class="reveal" style="--d:.17s"><td>Prepared lessons</td><td>Prepared students</td></tr>
+        <tr class="reveal" style="--d:.24s"><td>Clear instructions</td><td>Active participation</td></tr>
+        <tr class="reveal" style="--d:.31s"><td>Fair assessment</td><td>Academic honesty</td></tr>
+        <tr class="reveal" style="--d:.38s"><td>Respect</td><td>Respect</td></tr>
+        <tr class="reveal" style="--d:.45s"><td>Reasonable consideration</td><td>Responsibility</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= GROUND RULES ================= -->
+<section id="rules">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Ground rules</h2>
+      <p>These apply in every course I handle. Course-specific grading and requirements are in each course's syllabus.</p>
+    </div>
+    <div class="rules">
+      <details class="reveal" style="--d:.10s">
+        <summary><span class="n">01</span><span>Attendance and punctuality</span><span class="plus" aria-hidden="true"></span></summary>
+        <div class="body"><div class="body-in">
+          <p>Be in the classroom and ready before the scheduled time. Class officially starts on the dot; after 15 minutes, the absence/late policy applies.</p>
+          <ul><li>Repeated lateness may affect your participation and attendance standing.</li><li>University attendance policies still apply on top of this.</li></ul>
+          <p class="note">Legitimate circumstances will be considered appropriately.</p>
+        </div></div>
+      </details>
+      <details class="reveal" style="--d:.17s">
+        <summary><span class="n">02</span><span>Quizzes and exams</span><span class="plus" aria-hidden="true"></span></summary>
+        <div class="body"><div class="body-in">
+          <ul><li><strong>Before:</strong> be seated and ready before the assessment begins.</li><li><strong>During:</strong> follow the instructions carefully and maintain integrity.</li><li><strong>Late:</strong> late students may be restricted from taking the assessment, depending on the circumstances.</li></ul>
+          <p class="note">Legitimate circumstances will be considered fairly and consistently.</p>
+        </div></div>
+      </details>
+      <details class="reveal" style="--d:.24s">
+        <summary><span class="n">03</span><span>Technology in the classroom</span><span class="plus" aria-hidden="true"></span></summary>
+        <div class="body"><div class="body-in">
+          <p>No phones or personal gadgets during class unless permission is given. Devices may be used when they're:</p>
+          <ul><li>required for an activity,</li><li>needed for programming or research,</li><li>used for an online assessment,</li><li>specifically permitted by me, or</li><li>needed for legitimate academic or accessibility purposes.</li></ul>
+          <p class="note">Technology is a learning tool, not a distraction.</p>
+        </div></div>
+      </details>
+      <details class="reveal" style="--d:.31s">
+        <summary><span class="n">04</span><span>Respect the classroom</span><span class="plus" aria-hidden="true"></span></summary>
+        <div class="body"><div class="body-in">
+          <ul><li><strong>Be ready</strong> — seated and prepared when class begins.</li><li><strong>Be present</strong> — give your attention to the discussion.</li><li><strong>Be responsible</strong> — clean your area and take care of classroom resources.</li><li><strong>Be respectful</strong> — don't interrupt, ridicule, or distract others.</li></ul>
+          <p>If I arrive and the class is excessively noisy, people are standing around, or the room is clearly unprepared, I may conduct a short on-the-spot assessment. Instructional time is valuable, and I expect everyone to come ready to learn.</p>
+        </div></div>
+      </details>
+      <details class="reveal" style="--d:.38s">
+        <summary><span class="n">05</span><span>Your work must be your work</span><span class="plus" aria-hidden="true"></span></summary>
+        <div class="body"><div class="body-in">
+          <ul><li><strong>No cheating</strong> during quizzes and examinations.</li><li><strong>No plagiarism</strong> — give credit where credit is due.</li><li><strong>No copying</strong> — don't submit another student's work.</li><li><strong>No misrepresentation</strong> — don't claim work you didn't actually perform.</li></ul>
+          <p class="note">When in doubt, ask before submitting.</p>
+        </div></div>
+      </details>
+      <details class="reveal" style="--d:.45s">
+        <summary><span class="n">06</span><span>Submissions</span><span class="plus" aria-hidden="true"></span></summary>
+        <div class="body"><div class="body-in">
+          <ul><li>Submit through the designated platform.</li><li>Follow the required format and the correct filename.</li><li>Check your file before submitting.</li><li>Submit before the deadline.</li></ul>
+          <p class="note">"I submitted the wrong/corrupted file" is still a submission problem. Double-check your work — accountability matters in professional environments.</p>
+        </div></div>
+      </details>
+      <details class="reveal" style="--d:.52s">
+        <summary><span class="n">07</span><span>Group work is not a free ride</span><span class="plus" aria-hidden="true"></span></summary>
+        <div class="body"><div class="body-in">
+          <p>Every member is accountable. Participate and communicate, meet deadlines, contribute meaningfully, document your contribution, and tell me early when problems come up.</p>
+          <p class="note">Being in a group does not automatically mean receiving the same individual performance grade.</p>
+        </div></div>
+      </details>
+      <details class="reveal" style="--d:.59s">
+        <summary><span class="n">08</span><span>How we communicate</span><span class="plus" aria-hidden="true"></span></summary>
+        <div class="body"><div class="body-in">
+          <p>Announcements go through the class group or LMS. Submissions go through the LMS or designated platform. Academic questions belong in class or during consultation. Personal concerns go through private message or email.</p>
+          <p class="note">Please communicate respectfully and professionally, and allow reasonable response time.</p>
+        </div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRACK RECORD ================= -->
+<section id="record">
+  <div class="hairline" aria-hidden="true"></div><div class="warm" aria-hidden="true" style="right:-14vw;top:30%"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Track record</h2>
+      <p>What I did before I started asking you to do the same.</p>
+    </div>
+    <div class="record-grid">
+      <div class="pane reveal" aria-hidden="true">
+        <img src="images/grad-diploma.jpg" alt="" data-for="honors" loading="lazy">
+        <img src="images/hinirang.jpg" alt="" data-for="leadership" loading="lazy">
+        <img src="images/lambo-check.jpg" alt="" data-for="competitions" loading="lazy">
+        <img src="images/papaya-field.jpg" alt="" data-for="research" loading="lazy">
+        <img src="images/medals.jpg" alt="" data-for="service" loading="lazy">
+        <div class="cap"><span data-cap></span></div>
+      </div>
+
+      <div>
+        <div class="ledger reveal" data-key="honors" data-cap="Graduation day at UC, Cum Laude and Top 4 of the batch.">
+          <h3>Academic honors</h3>
+          <figure class="ledger-img"><img src="images/grad-diploma.jpg" alt="John Michael at graduation, holding his UC diploma." loading="lazy"></figure>
+          <ul>
+            <li class="reveal" style="--d:.15s"><span>Cum Laude, Top 4 Overall <span class="sub">BS Information Technology, University of Cebu</span></span><span class="yr">2026</span></li>
+            <li class="reveal" style="--d:.20s"><span>Outstanding IT Graduate</span><span class="yr">2026</span></li>
+            <li class="reveal" style="--d:.25s"><span>IT Excellence Award</span><span class="yr">2026</span></li>
+            <li class="reveal" style="--d:.30s"><span>Dean's Lister <span class="sub">Every semester until graduation</span></span><span class="yr">2022–2026</span></li>
+            <li class="reveal" style="--d:.35s"><span>University Academic Scholarship <span class="sub">Maintained until graduation</span></span><span class="yr">2022–2026</span></li>
+          </ul>
+        </div>
+
+        <div class="ledger reveal" data-key="leadership" data-cap="Recognition night with the Academic Scholars Alliance.">
+          <h3>Leadership</h3>
+          <figure class="ledger-img"><img src="images/hinirang.jpg" alt="Academic Scholars Alliance officers on stage at a recognition event." loading="lazy"></figure>
+          <ul>
+            <li class="reveal" style="--d:.15s"><span>President, Academic Scholars Alliance</span><span class="yr">2023–2024</span></li>
+            <li class="reveal" style="--d:.20s"><span>Chair, University of Cebu Council of Presidents</span><span class="yr">2023–2024</span></li>
+            <li class="reveal" style="--d:.25s"><span>Awards Committee Head</span><span class="yr">2023–2024</span></li>
+            <li class="reveal" style="--d:.30s"><span>Results Committee Head</span><span class="yr">2023–2024</span></li>
+            <li class="reveal" style="--d:.35s"><span>Department Representative, Academic Scholars Alliance</span><span class="yr">2022–2023</span></li>
+            <li class="reveal" style="--d:.40s"><span>Class Mayor</span><span class="yr">2023–2026</span></li>
+            <li class="reveal" style="--d:.45s"><span>Capstone Project Manager</span><span class="yr">2025–2026</span></li>
+          </ul>
+        </div>
+
+        <div class="ledger reveal" data-key="competitions" data-cap="LAMBO 2026, Cebu's AI Business Summit. First place with Visayas Visionaries.">
+          <h3>Competitions</h3>
+          <figure class="ledger-img"><img src="images/lambo-check.jpg" alt="John Michael holding the first-place check at LAMBO 2026." loading="lazy"></figure>
+          <ul>
+            <li class="reveal" style="--d:.15s"><span>Champion, LAMBO 2026 <span class="sub">Cebu's AI Business Summit</span></span><span class="yr">2026</span></li>
+            <li class="reveal" style="--d:.20s"><span>2nd Place, InnovateCebu Finalist</span><span class="yr">2026</span></li>
+            <li class="reveal" style="--d:.25s"><span>Champion, Lightning Pitch Competition <span class="sub">CCS Exhibit, pioneer year</span></span><span class="yr">2025–2026</span></li>
+            <li class="reveal" style="--d:.30s"><span>Best in Booth <span class="sub">CCS Exhibit, pioneer year</span></span><span class="yr">2025–2026</span></li>
+            <li class="reveal" style="--d:.35s"><span>Most Outstanding Project</span><span class="yr">2024–2025</span></li>
+            <li class="reveal" style="--d:.40s"><span>Best in Capstone, Social Relevance <span class="sub">CCS Days</span></span><span class="yr"></span></li>
+            <li class="reveal" style="--d:.45s"><span>3rd Place, Lightning Pitch Competition <span class="sub">CCS Days</span></span><span class="yr"></span></li>
+            <li class="reveal" style="--d:.50s"><span>3rd Place, Best Innovation Award</span><span class="yr"></span></li>
+            <li class="reveal" style="--d:.55s"><span>3rd Place, Best Poster Award</span><span class="yr"></span></li>
+            <li class="reveal" style="--d:.60s"><span>Champion, Most Excellent Team <span class="sub">Academic Scholars Alliance</span></span><span class="yr">2022–2023</span></li>
+          </ul>
+        </div>
+
+        <div class="ledger reveal" data-key="research" data-cap="Fieldwork for PAPAIA, long before it became a conference paper.">
+          <h3>Professional and research</h3>
+          <figure class="ledger-img"><img src="images/papaya-field.jpg" alt="John Michael in a papaya farm during PAPAIA fieldwork." loading="lazy"></figure>
+          <ul>
+            <li class="reveal" style="--d:.15s"><span>Global Business Services Student Intern, Lexmark <span class="sub">Now a subsidiary of Xerox</span></span><span class="yr"></span></li>
+            <li class="reveal" style="--d:.20s"><span>PAPAIA: A Mobile-Blended Learning System for Vocational Training in Papaya Disease Management <span class="sub">Accepted, presented, and published at the 12th International Conference on Education and Training Technologies, Seoul, South Korea. Presented before graduating.</span></span><span class="yr">May 2026</span></li>
+          </ul>
+        </div>
+
+        <div class="ledger reveal" data-key="service" data-cap="Senior Night medals, laid over the ICETT certificate.">
+          <h3>Service</h3>
+          <figure class="ledger-img"><img src="images/medals.jpg" alt="Gold medals laid over a certificate." loading="lazy"></figure>
+          <ul>
+            <li class="reveal" style="--d:.15s"><span>CCS Innovation – Initiative Service Award</span><span class="yr"></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MOMENTS (pinned horizontal gallery) ================= -->
+<section class="moments" id="moments">
+  <div class="pin">
+    <div class="orb b" aria-hidden="true" style="right:auto;left:-10vw;top:-10vw;bottom:auto"></div><div class="stars" data-stars="22" aria-hidden="true"></div>
+    <div class="head">
+      <h2>Moments</h2>
+      <p>The parts of the résumé that had people in them.</p>
+    </div>
+    <div class="track" data-track>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-check.jpg" alt="" loading="lazy"></div><figcaption><b>LAMBO 2026</b>Cebu's AI Business Summit at Waterfront Cebu. First place, Visayas Visionaries.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-handshake.jpg" alt="" loading="lazy"></div><figcaption><b>The moment it was called</b>Still processing it, apparently.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-stage.jpg" alt="" loading="lazy"></div><figcaption><b>On stage with the team</b>The people who did the work with me.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-office.jpg" alt="" loading="lazy"></div><figcaption><b>Bringing it home</b>Presenting the win back at UC.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-hall.jpg" alt="" loading="lazy"></div><figcaption><b>The whole room</b>Operators, founders, and one very nervous student team.</figcaption></figure>
+      <figure class="card tall" tabindex="0"><div class="ph"><img src="images/papaya-field.jpg" alt="" loading="lazy"></div><figcaption><b>PAPAIA fieldwork</b>Papaya farms first, code second.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/papaia-team.jpg" alt="" loading="lazy"></div><figcaption><b>The PAPAIA team</b>Whiteboard full, laptop open.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/icett-cert.jpg" alt="" loading="lazy"></div><figcaption><b>ICETT 2026, Seoul</b>Oral presentation at the 12th International Conference on Education and Training Technologies.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/excellence-banner.jpg" alt="" loading="lazy"></div><figcaption><b>On the wall</b>Two entries on the CCS Celebrating Excellence board: InnovateCebu and ICETT.</figcaption></figure>
+      <figure class="card tall" tabindex="0"><div class="ph"><img src="images/lexmark.jpg" alt="" loading="lazy"></div><figcaption><b>Lexmark</b>Intern days with Global Business Services.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/hinirang.jpg" alt="" loading="lazy"></div><figcaption><b>Academic Scholars Alliance</b>Recognition night with the officers.</figcaption></figure>
+      <figure class="card" tabindex="0"><div class="ph"><img src="images/asa-group.jpg" alt="" loading="lazy"></div><figcaption><b>The Alliance</b>Roughly 1,400 scholars. This is a few of them.</figcaption></figure>
+      <figure class="card tall" tabindex="0"><div class="ph"><img src="images/senior-night.jpg" alt="" loading="lazy"></div><figcaption><b>CCS Senior Night</b>The Royal Masquerade, medals included.</figcaption></figure>
+      <figure class="card tall" tabindex="0"><div class="ph"><img src="images/grad-sea.jpg" alt="" loading="lazy"></div><figcaption><b>Done</b>Cap in hand, diploma in the other.</figcaption></figure>
+    </div>
+    <div class="ctrl">
+      <button class="btn" type="button" data-prev aria-label="Previous photo"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="btn" type="button" data-next aria-label="Next photo"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="rail" aria-hidden="true"><i data-rail></i></div>
+      <span class="hint">Scroll, drag, or use the arrow keys. Click a photo to enlarge.</span>
+    </div>
+  </div>
+</section>
+
+<div class="lb" data-lb role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <span class="count" data-lb-count></span>
+  <button class="x" type="button" data-lb-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="nav prev" type="button" data-lb-prev aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="nav next" type="button" data-lb-next aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  <figure><img src="" alt="" data-lb-img><figcaption data-lb-cap></figcaption></figure>
+</div>
+
+<!-- ================= OFF THE CLOCK ================= -->
+<section id="games">
+  <div class="ghost br" aria-hidden="true" style="bottom:-40vmin"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Off the clock</h2>
+      <p>I take games about as seriously as I take deadlines. Current standings, for anyone who wants to compare.</p>
+    </div>
+    <div class="games reveal">
+      <div class="reveal" style="--d:.15s"><div class="game">Mobile Legends</div><div class="rank">Mythical Immortal</div><div class="srv">Ranked</div></div>
+      <div class="reveal" style="--d:.27s"><div class="game">Genshin Impact</div><div class="rank">World Level 10, AR 60</div><div class="srv">Max adventure rank</div></div>
+      <div class="reveal" style="--d:.39s"><div class="game">Cookie Run: Kingdom</div><div class="rank">Top 12</div><div class="srv">Dark Cacao server</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FINALE: reach + sign-off ================= -->
+<div class="finale">
+  <div class="aurora" aria-hidden="true"></div><div class="orb a" aria-hidden="true" style="left:auto;right:-12vw;top:-10vw"></div><div class="stars" data-stars="40" aria-hidden="true"></div><div class="ring r3" aria-hidden="true"></div>
+<section id="reach" class="reach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>How to reach me</h2>
+      <p>Use the right channel and you'll get a faster answer.</p>
+    </div>
+    <div class="channels reveal">
+      <div class="reveal" style="--d:.15s"><div class="what">Announcements</div><div class="where">Class group or LMS</div></div>
+      <div class="reveal" style="--d:.27s"><div class="what">Submissions</div><div class="where">LMS or designated platform</div></div>
+      <div class="reveal" style="--d:.39s"><div class="what">Academic questions</div><div class="where">In class or consultation</div></div>
+      <div class="reveal" style="--d:.51s"><div class="what">Personal concerns</div><div class="where">Private message or email</div></div>
+    </div>
+    <div class="contact reveal" style="--d:.5s">
+      <a href="mailto:johnmichaeleborda79@gmail.com">johnmichaeleborda79@gmail.com</a>
+      <span class="hint">CCS Faculty, Mezzanine Floor, College Building</span>
+      <span class="hint">Consultations: free time during class hours, and Fridays. Message me in advance so I can set the time aside.</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><div class="inner">
+    <div class="sign reveal" data-sign><span>Let's learn.</span><span>Let's build.</span><span>Let's challenge ourselves.</span></div>
+    <div class="reveal" style="--d:.6s">John Michael Eborda<br>College of Computer Studies, University of Cebu<br><span style="color:rgba(246,244,239,.4)">Sir Michael, if you're in my class.</span></div>
+  </div></div>
+  <div class="thin">See you in class.</div>
+</footer>
+</div><!-- /.finale -->
+
+<button class="totop" type="button" data-totop aria-label="Back to top">
+  <svg class="dial" viewBox="0 0 52 52"><circle class="bg" cx="26" cy="26" r="24"/><circle class="fg" cx="26" cy="26" r="24"/></svg>
+  <svg class="arrow" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+</div><!-- /.page -->
+
+<script>
+(function(){
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var narrow = function(){ return window.innerWidth <= 720; };
+  var clamp = function(v,a,b){ return Math.max(a, Math.min(b, v)); };
+
+  /* progress bar + back-to-top ring */
+  var bar = document.querySelector('.progress'), totop = document.querySelector('[data-totop]'), topFg = totop.querySelector('.fg');
+  totop.addEventListener('click', function(){ window.scrollTo({ top:0, behavior: rm ? 'auto' : 'smooth' }); });
+
+  /* scatter stars */
+  document.querySelectorAll('[data-stars]').forEach(function(box){
+    var n = parseInt(box.dataset.stars, 10) || 20, frag = document.createDocumentFragment();
+    for (var i = 0; i < n; i++) {
+      var st = document.createElement('i'); st.className = 'star' + (Math.random() < .3 ? ' g' : '');
+      st.style.left = (Math.random() * 100) + '%'; st.style.top = (Math.random() * 100) + '%';
+      st.style.setProperty('--t', (4 + Math.random() * 7).toFixed(1) + 's');
+      st.style.setProperty('--dl', (-Math.random() * 10).toFixed(1) + 's');
+      st.style.setProperty('--o', (.35 + Math.random() * .55).toFixed(2));
+      frag.appendChild(st);
+    }
+    box.appendChild(frag);
+  });
+
+  /* reveal on scroll */
+  var els = document.querySelectorAll('.reveal, section');
+  if (rm || !('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); }
+  else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin:'0px 0px -8% 0px', threshold:0.05 });
+    els.forEach(function(e){ io.observe(e); });
+  }
+
+  /* split the statement into words */
+  var stmt = document.querySelector('[data-words]'), words = [];
+  if (stmt) {
+    var walk = function(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(n){
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(t){
+            if (!t) return;
+            if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
+            var s = document.createElement('span'); s.className = 'w'; s.textContent = t;
+            if (node.classList && node.classList.contains('gold')) s.classList.add('gold');
+            frag.appendChild(s); words.push(s);
+          });
+          node.replaceChild(frag, n);
+        } else if (n.nodeType === 1) { walk(n); }
+      });
+    };
+    walk(stmt);
+    if (rm) words.forEach(function(w){ w.classList.add('on'); });
+  }
+  var stmtSec = document.getElementById('statement');
+
+  /* sticky photo pane in Track record */
+  var pane = document.querySelector('.pane');
+  if (pane) {
+    var imgs = pane.querySelectorAll('img'), cap = pane.querySelector('[data-cap]'), current = null;
+    var setPane = function(key, text){
+      if (key === current) return; current = key;
+      imgs.forEach(function(i){ i.classList.toggle('on', i.dataset.for === key); });
+      cap.style.opacity = 0;
+      setTimeout(function(){ cap.textContent = text; cap.style.opacity = 1; }, 250);
+    };
+    var ledgers = document.querySelectorAll('.ledger[data-key]');
+    setPane(ledgers[0].dataset.key, ledgers[0].dataset.cap);
+    if ('IntersectionObserver' in window) {
+      var lio = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if (en.isIntersecting) setPane(en.target.dataset.key, en.target.dataset.cap); });
+      }, { rootMargin:'-35% 0px -55% 0px', threshold:0 });
+      ledgers.forEach(function(l){ lio.observe(l); });
+    }
+  }
+
+  /* pinned horizontal gallery */
+  var moments = document.getElementById('moments'), track = document.querySelector('[data-track]');
+  var cards = track ? Array.prototype.slice.call(track.children) : [];
+  var maxX = 0, rail = document.querySelector('[data-rail]');
+  function sizeGallery(){
+    if (!moments) return;
+    if (narrow() || rm) { moments.style.height = ''; track.style.transform = ''; cards.forEach(function(c){ c.style.transform=''; c.style.opacity=''; c.firstElementChild.firstElementChild.style.objectPosition=''; }); return; }
+    maxX = track.scrollWidth - window.innerWidth;
+    moments.style.height = (window.innerHeight + maxX + 200) + 'px';
+  }
+
+  /* hero elements */
+  var heroCopy = document.querySelector('.hero-copy'), portrait = document.querySelector('.portrait');
+
+  var ticking = false;
+  function frame(){
+    ticking = false;
+    var y = window.scrollY, vh = window.innerHeight, h = document.documentElement;
+    var pr = y / (h.scrollHeight - h.clientHeight || 1);
+    bar.style.transform = 'scaleX(' + pr + ')';
+    topFg.style.strokeDashoffset = 150.8 * (1 - pr);
+    totop.classList.toggle('show', y > vh * .8);
+    if (rm) return;
+
+    /* hero: recede as the page slides over it */
+    if (!narrow()) {
+      var p = clamp(y / vh, 0, 1);
+      heroCopy.style.opacity = 1 - p * 1.5;
+      heroCopy.style.transform = 'translateY(' + (-p * 80) + 'px)';
+      portrait.style.transform = 'scale(' + (1 + p * .12) + ') translateY(' + (p * 40) + 'px)';
+      portrait.style.opacity = 1 - p * 1.1;
+    } else { heroCopy.style.opacity = ''; heroCopy.style.transform=''; portrait.style.transform=''; portrait.style.opacity=''; }
+
+    /* statement words */
+    if (stmtSec && words.length) {
+      var r = stmtSec.getBoundingClientRect();
+      var total = r.height - vh, sp = narrow() ? 1 : clamp(-r.top / Math.max(total, 1), 0, 1);
+      var lit = Math.floor(sp * 1.15 * words.length);
+      words.forEach(function(w, i){ w.classList.toggle('on', i < lit); });
+    }
+
+    /* gallery */
+    if (moments && !narrow()) {
+      var g = moments.getBoundingClientRect();
+      var gp = clamp(-g.top / Math.max(moments.offsetHeight - vh, 1), 0, 1);
+      var x = -gp * maxX;
+      track.style.transform = 'translate3d(' + x + 'px,0,0)';
+      rail.style.transform = 'scaleX(' + gp + ')';
+      var cx = window.innerWidth / 2;
+      cards.forEach(function(c){
+        var cr = c.getBoundingClientRect();
+        var d = clamp(((cr.left + cr.width / 2) - cx) / window.innerWidth, -1, 1);   /* -1 .. 1 */
+        c.style.opacity = 1 - Math.abs(d) * .3;
+        c.style.transform = 'translateY(' + (Math.abs(d) * 18) + 'px)';
+        var im = c.firstElementChild.firstElementChild;
+        im.style.objectPosition = (50 + d * 12) + '% 50%';   /* gentle parallax inside the frame, never a stretch */
+      });
+    }
+  }
+  function onScroll(){ if (!ticking){ requestAnimationFrame(frame); ticking = true; } }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', function(){ sizeGallery(); onScroll(); });
+  window.addEventListener('load', function(){ sizeGallery(); onScroll(); });
+  sizeGallery(); onScroll();
+
+  /* gallery: drag, wheel, buttons, keys */
+  if (track) {
+    var drag = null;
+    track.addEventListener('pointerdown', function(e){
+      if (e.button !== 0) return;
+      drag = { x:e.clientX, y:e.clientY, id:e.pointerId, sl:track.scrollLeft, moved:false };
+    });
+    track.addEventListener('pointermove', function(e){
+      if (!drag) return;
+      var dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) < 6) return;
+      if (!drag.moved) { drag.moved = true; track.classList.add('dragging'); try { track.setPointerCapture(drag.id); } catch(err){} }
+      if (narrow() || rm) { track.scrollLeft = drag.sl - dx; }
+      else { window.scrollBy(0, -(e.clientX - drag.x) * 1.4); drag.x = e.clientX; }
+    });
+    var endDrag = function(){ if (drag && drag.moved) { track.classList.add('just-dragged'); setTimeout(function(){ track.classList.remove('just-dragged'); }, 50); } drag = null; track.classList.remove('dragging'); };
+    track.addEventListener('pointerup', endDrag); track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('wheel', function(e){
+      if (narrow() || rm) return;
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); window.scrollBy(0, e.deltaX); }
+    }, { passive:false });
+    var step = function(dir){
+      var w = cards[0].getBoundingClientRect().width + 32;
+      if (narrow() || rm) track.scrollBy({ left: dir * w, behavior:'smooth' });
+      else window.scrollBy({ top: dir * w, behavior:'smooth' });
+    };
+    document.querySelector('[data-prev]').addEventListener('click', function(){ step(-1); });
+    document.querySelector('[data-next]').addEventListener('click', function(){ step(1); });
+    moments.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+    });
+  }
+
+  /* hero spotlight follows the cursor */
+  var hero = document.querySelector('.hero');
+  if (hero && !rm) hero.addEventListener('pointermove', function(e){
+    var r = hero.getBoundingClientRect();
+    hero.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    hero.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+
+  /* lightbox */
+  var lb = document.querySelector('[data-lb]');
+  if (lb && cards.length) {
+    var lbImg = lb.querySelector('[data-lb-img]'), lbCap = lb.querySelector('[data-lb-cap]'), lbCount = lb.querySelector('[data-lb-count]');
+    var idx = 0, lastFocus = null;
+    var show = function(i){
+      idx = (i + cards.length) % cards.length;
+      var c = cards[idx], im = c.querySelector('img'), fc = c.querySelector('figcaption');
+      lbImg.src = im.getAttribute('src'); lbImg.alt = fc.textContent;
+      lbCap.innerHTML = fc.innerHTML;
+      lbCount.textContent = (idx + 1) + ' / ' + cards.length;
+    };
+    var open = function(i){ lastFocus = document.activeElement; show(i); lb.hidden = false; requestAnimationFrame(function(){ lb.classList.add('open'); }); document.body.classList.add('lb-open'); lb.querySelector('[data-lb-close]').focus(); };
+    var close = function(){ lb.classList.remove('open'); document.body.classList.remove('lb-open'); setTimeout(function(){ lb.hidden = true; }, 400); if (lastFocus) lastFocus.focus(); };
+    cards.forEach(function(c, i){
+      c.addEventListener('click', function(){ if (track.classList.contains('just-dragged')) return; open(i); });
+      c.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); } });
+    });
+    lb.querySelector('[data-lb-close]').addEventListener('click', close);
+    lb.querySelector('[data-lb-prev]').addEventListener('click', function(){ show(idx - 1); });
+    lb.querySelector('[data-lb-next]').addEventListener('click', function(){ show(idx + 1); });
+    lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+    document.addEventListener('keydown', function(e){
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight') show(idx + 1);
+      if (e.key === 'ArrowLeft') show(idx - 1);
+    });
+  }
+
+  /* accordion */
+  var items = document.querySelectorAll('.rules details');
+  items.forEach(function(d){
+    var sum = d.querySelector('summary'), body = d.querySelector('.body');
+    function close(el){
+      var b = el.querySelector('.body');
+      if (rm){ el.open = false; return; }
+      b.style.height = b.scrollHeight + 'px';
+      requestAnimationFrame(function(){ b.style.height = '0px'; });
+      b.addEventListener('transitionend', function h(){ el.open = false; b.style.height = ''; b.removeEventListener('transitionend', h); });
+    }
+    sum.addEventListener('click', function(e){
+      e.preventDefault();
+      if (d.open){ close(d); return; }
+      items.forEach(function(o){ if (o !== d && o.open) close(o); });
+      d.open = true;
+      if (rm) return;
+      body.style.height = '0px';
+      requestAnimationFrame(function(){ body.style.height = body.scrollHeight + 'px'; });
+      body.addEventListener('transitionend', function h(){ body.style.height = 'auto'; body.removeEventListener('transitionend', h); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
