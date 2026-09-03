@@ -120,7 +120,7 @@
   .finale .sign span:nth-child(2){transition-delay:.25s}.finale .sign span:nth-child(3){transition-delay:.5s}
   .finale footer .inner{padding-top:3rem;padding-bottom:3rem;align-items:flex-end}
   .beyond{font-family:var(--display);font-size:clamp(1.25rem,2.2vw,1.7rem);font-variation-settings:"opsz" 48;line-height:1.35;color:rgba(246,244,239,.85);max-width:42ch;margin:0 0 1rem;padding-top:1rem;position:relative;z-index:1}
-  .beyond::first-letter{color:var(--brass-ink)}
+  .beyond [data-lit] .w,.beyond .w{opacity:.28}.beyond .w.on{opacity:1}
   .finale .thin{margin-top:5rem;text-align:center;font-size:.8rem;color:rgba(246,244,239,.35);position:relative;z-index:1}
 
   /* ---------- intro curtain ---------- */
@@ -151,7 +151,7 @@
   .numbers{padding:clamp(3.5rem,7vw,5.5rem) 0}
   .numbers .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.5rem,3vw,3rem)}
   .numbers .n{font-family:var(--display);font-size:clamp(2.8rem,6vw,5rem);font-variation-settings:"opsz" 144,"SOFT" 40;line-height:1;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
-  .numbers .n small{font-size:.45em;color:var(--brass);letter-spacing:0;margin-left:.1em}
+  .numbers .n small{font-size:.45em;letter-spacing:0;margin-left:.1em}
   .numbers .l{margin-top:.6rem;color:var(--muted);font-size:.95rem;max-width:18ch}
 
   /* ---------- now (courses + tools) ---------- */
@@ -299,6 +299,27 @@
   .journey .y{font-family:var(--display);font-size:1.5rem;font-variation-settings:"opsz" 48;line-height:1}
   .journey .m{margin:.4rem 0 0;font-size:.88rem;color:var(--muted);max-width:none}
 
+  /* ---------- gradient type: light travels through the letters ---------- */
+  .grad{background-image:linear-gradient(105deg,var(--g0) 0%,var(--g1) 22%,var(--g2) 42%,var(--g3) 58%,var(--g1) 78%,var(--g0) 100%);background-size:320% 100%;background-position:var(--gp,0%) 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .grad.dark{--g0:var(--paper);--g1:#fff;--g2:var(--brass-ink);--g3:#cfe0ff}
+  .grad.light{--g0:var(--ink);--g1:#2a3a5a;--g2:var(--brass);--g3:#4a6aa8}
+  .grad.drift{animation:gdrift 9s ease-in-out infinite alternate}
+  @keyframes gdrift{from{background-position:0% 0}to{background-position:100% 0}}
+  .hero h1 em{-webkit-text-fill-color:transparent}
+  .finale .sign span.grad{display:block}
+
+  /* ---------- paragraphs that light up as you read ---------- */
+  [data-lit] .w{opacity:.28;transition:opacity .35s ease}
+  [data-lit] .w.on{opacity:1}
+  [data-lit] strong .w,[data-lit] .w.k{font-weight:600}
+
+  /* ---------- start / end frame photo ---------- */
+  .aside-photo img.end{position:absolute;inset:0;opacity:0}
+  .aside-photo{position:relative}
+  .aside-cap .a,.aside-cap .b{transition:opacity .5s ease}
+  .aside-cap .b{position:absolute;left:0;top:0;opacity:0}
+  .aside-cap{position:relative}
+
   .progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--brass);transform:scaleX(0);transform-origin:left;z-index:50;pointer-events:none}
 
   /* ---------- hero (pinned; the page slides over it) ---------- */
@@ -354,6 +375,8 @@
   .statement .w{display:inline-block;opacity:.18;transform:translateY(.15em);transition:opacity .35s ease,transform .5s var(--ease);will-change:opacity,transform}
   .statement .w.on{opacity:1;transform:none}
   .statement .w.gold{color:var(--brass-ink)}
+  .statement p{--g0:var(--paper);--g1:#fff;--g2:var(--brass-ink);--g3:#cfe0ff}
+  .statement .w.gold.on{background-image:linear-gradient(105deg,var(--brass-ink),#fff 50%,var(--brass-ink));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:gdrift 4s ease-in-out infinite alternate}
   .statement .src{margin-top:2.5rem;font-family:var(--sans);font-size:.9rem;color:rgba(246,244,239,.45)}
 
   /* ---------- teach ---------- */
@@ -532,6 +555,8 @@
     .rules .body,.rules .body-in,.ledger li,.games > div,.contact a::after,.rules summary .plus{transition:none}
     .progress,.hero .cue{display:none}
     .orb,.ring,.aurora,.star,.hairline::before,.ghost,.warm,.meteor,.sparkle{animation:none}
+    .grad.drift{animation:none}
+    [data-lit] .w{opacity:1}
     .framed .tilt,[data-tilt]{transition:none;transform:none !important}
     .journey .line i{transform:none;transition:none}.journey li{opacity:1;transform:none;transition:none}
     .meteor,.sparkle,.burst,.dragcur{display:none}
@@ -568,6 +593,9 @@
     a{text-decoration:none;color:#000}
     .numbers .n{color:#000}.numbers .n small{color:#555}
     .sec-head.in h2,.moments .head.in h2{animation:none;background:none;color:#000}
+    .grad{background:none;color:#000;-webkit-text-fill-color:#000;animation:none}
+    [data-lit] .w{opacity:1}
+    .aside-photo img.end{display:none}
   }
 </style>
 </head>
@@ -604,7 +632,7 @@
   <div class="wrap">
     <div class="hero-copy">
       <p class="kicker rise">Meet your instructor</p>
-      <h1 class="rise">John Michael <em>Eborda</em></h1>
+      <h1 class="rise grad dark" data-grad-mouse>John Michael <em>Eborda</em></h1>
       <p class="role rise">Instructor, College of Computer Studies<br>University of Cebu – Banilad Campus</p>
       <p class="motto rise">Strict on standards. Reasonable with people.</p>
     </div>
@@ -630,20 +658,20 @@
   <div class="wrap two">
     <div>
       <div class="sec-head reveal"><h2>Who I am</h2></div>
-      <p class="lede reveal" style="--d:.1s">I finished my BSIT here at UC's College of Computer Studies — Cum Laude, Top 4 of the batch — and joined the faculty right after. So not long ago, I was sitting where you are.</p>
-      <p class="reveal" style="--d:.2s">Before teaching, I interned with Lexmark's Global Business Services team, and I presented and published research at an international conference in Seoul while still a student. Most of college, though, I spent leading things: the Academic Scholars Alliance, the University Council of Presidents, my own class, and later our capstone team.</p>
-      <p class="reveal" style="--d:.3s">That's where I learned what I now ask of you: show up prepared, own your work, and ask when you're stuck. I'll hold you to a high bar, and I'll be fair about it.</p>
+      <p class="lede reveal" style="--d:.1s" data-lit>I finished my BSIT here at UC's College of Computer Studies — <strong>Cum Laude, Top 4 of the batch</strong> — and joined the faculty right after. So not long ago, <strong>I was sitting where you are.</strong></p>
+      <p class="reveal" style="--d:.2s" data-lit>Before teaching, I interned with <strong>Lexmark's</strong> Global Business Services team, and I presented and published research at an <strong>international conference in Seoul</strong> while still a student. Most of college, though, I spent leading things: the Academic Scholars Alliance, the University Council of Presidents, my own class, and later our capstone team.</p>
+      <p class="reveal" style="--d:.3s" data-lit>That's where I learned what I now ask of you: <strong>show up prepared, own your work, and ask when you're stuck.</strong> I'll hold you to a high bar, and I'll be fair about it.</p>
     </div>
     <div>
       <figure class="framed on-light reveal" data-framed style="--d:.15s;margin:0">
         <div class="tilt">
           <div class="offset" aria-hidden="true"></div>
-          <div class="aside-photo"><img src="images/grad-sea.jpg" alt="John Michael in graduation gown by the sea, holding his diploma." loading="lazy" style="object-position:50% 62%"></div>
+          <div class="aside-photo" data-frames><img src="images/grad-sea.jpg" alt="John Michael in graduation gown by the sea, holding his diploma." loading="lazy" style="object-position:50% 62%"><img class="end" src="images/lexmark-window.jpg" alt="John Michael at a Lexmark office window, late afternoon." loading="lazy" style="object-position:50% 30%"></div>
           <i class="tick tl" aria-hidden="true"></i><i class="tick tr" aria-hidden="true"></i><i class="tick bl" aria-hidden="true"></i><i class="tick br" aria-hidden="true"></i>
           <div class="glare" aria-hidden="true"></div>
         </div>
       </figure>
-      <p class="aside-cap reveal" style="--d:.2s">Graduation week, 2026. Cap off, diploma in hand.</p>
+      <p class="aside-cap reveal" style="--d:.2s" data-frames-cap><span class="a">Graduation week, 2026. Cap off, diploma in hand.</span><span class="b">Same year, different afternoon: the intern desk at Lexmark.</span></p>
       <ul class="facts reveal" style="--d:.25s" aria-label="At a glance">
         <li class="reveal" style="--d:.30s"><strong>Cum Laude</strong><span>Top 4 overall</span></li>
         <li class="reveal" style="--d:.36s"><strong>Dean's Lister</strong><span>every semester</span></li>
@@ -678,10 +706,10 @@
   <div class="warm blue" aria-hidden="true" style="right:-18vw;top:-40%"></div><div class="stars light" data-stars="12" aria-hidden="true"></div>
   <div class="wrap">
     <div class="grid">
-      <div class="reveal"><div class="n" data-count="1400" data-format="comma">0</div><div class="l">scholars in the Alliance I led as President</div></div>
-      <div class="reveal" style="--d:.12s"><div class="n" data-count="8">0</div><div class="l">semesters on the Dean's List, every single one</div></div>
-      <div class="reveal" style="--d:.24s"><div class="n"><small>Top</small><span data-count="4">0</span></div><div class="l">of the graduating batch, Cum Laude</div></div>
-      <div class="reveal" style="--d:.36s"><div class="n" data-count="1">0</div><div class="l">international paper presented in Seoul before graduating</div></div>
+      <div class="reveal"><div class="n grad light drift" data-count="1400" data-format="comma">0</div><div class="l">scholars in the Alliance I led as President</div></div>
+      <div class="reveal" style="--d:.12s"><div class="n grad light drift" data-count="8">0</div><div class="l">semesters on the Dean's List, every single one</div></div>
+      <div class="reveal" style="--d:.24s"><div class="n grad light drift"><small>Top</small><span data-count="4">0</span></div><div class="l">of the graduating batch, Cum Laude</div></div>
+      <div class="reveal" style="--d:.36s"><div class="n grad light drift" data-count="1">0</div><div class="l">international paper presented in Seoul before graduating</div></div>
     </div>
   </div>
 </section>
@@ -1062,10 +1090,10 @@
 
 <footer>
   <div class="wrap">
-    <p class="beyond reveal">Beyond the job description: if you want to grow, I'll help however I can. Nurturing people who want to get better is the part of this I would do anyway.</p>
+    <p class="beyond reveal" data-lit>Beyond the job description: <strong>if you want to grow, I'll help however I can.</strong> Nurturing people who want to get better is the part of this I would do anyway.</p>
   </div>
   <div class="wrap"><div class="inner">
-    <div class="sign reveal" data-sign><span>Let's learn.</span><span>Let's build.</span><span>Let's challenge ourselves.</span></div>
+    <div class="sign reveal" data-sign><span class="grad dark drift">Let's learn.</span><span class="grad dark drift" style="animation-delay:-3s">Let's build.</span><span class="grad dark drift" style="animation-delay:-6s">Let's challenge ourselves.</span></div>
     <div class="reveal" style="--d:.6s">John Michael Eborda<br>College of Computer Studies, University of Cebu<br><span style="color:rgba(246,244,239,.4)">Sir Michael, if you're in my class.</span></div>
   </div></div>
   <div class="thin">See you in class.</div>
@@ -1260,7 +1288,7 @@
     document.querySelectorAll('.reveal, section').forEach(function(e){ e.classList.add('in'); });
     document.querySelectorAll('[data-count]').forEach(function(el){ var t = parseInt(el.dataset.count, 10); el.textContent = el.dataset.format === 'comma' ? t.toLocaleString('en-US') : String(t); });
     document.querySelectorAll('.rules details').forEach(function(d){ d.open = true; });
-    document.querySelectorAll('.statement .w').forEach(function(w){ w.classList.add('on'); });
+    document.querySelectorAll('.statement .w, [data-lit] .w').forEach(function(w){ w.classList.add('on'); });
   });
 
   /* progress bar + back-to-top ring */
@@ -1291,9 +1319,8 @@
     els.forEach(function(e){ io.observe(e); });
   }
 
-  /* split the statement into words */
-  var stmt = document.querySelector('[data-words]'), words = [];
-  if (stmt) {
+  /* split text into words (statement + lit paragraphs) */
+  function splitWords(root, list, goldClass){
     var walk = function(node){
       Array.prototype.slice.call(node.childNodes).forEach(function(n){
         if (n.nodeType === 3) {
@@ -1303,16 +1330,23 @@
             if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
             var s = document.createElement('span'); s.className = 'w'; s.textContent = t;
             if (node.classList && node.classList.contains('gold')) s.classList.add('gold');
-            frag.appendChild(s); words.push(s);
+            if (node.tagName === 'STRONG') s.classList.add('k');
+            frag.appendChild(s); list.push(s);
           });
           node.replaceChild(frag, n);
         } else if (n.nodeType === 1) { walk(n); }
       });
     };
-    walk(stmt);
-    if (rm) words.forEach(function(w){ w.classList.add('on'); });
+    walk(root);
   }
+  var stmt = document.querySelector('[data-words]'), words = [];
+  if (stmt) { splitWords(stmt, words); if (rm) words.forEach(function(w){ w.classList.add('on'); }); }
   var stmtSec = document.getElementById('statement');
+  var lits = [];
+  document.querySelectorAll('[data-lit]').forEach(function(el){ var ws = []; splitWords(el, ws); lits.push({ el:el, words:ws }); if (rm) ws.forEach(function(w){ w.classList.add('on'); }); });
+  var framesBox = document.querySelector('[data-frames]'), framesEnd = framesBox ? framesBox.querySelector('img.end') : null, framesCap = document.querySelector('[data-frames-cap]');
+  var heroH1 = document.querySelector('[data-grad-mouse]');
+  if (heroH1 && !rm) document.querySelector('.hero').addEventListener('pointermove', function(e){ heroH1.style.setProperty('--gp', (e.clientX / window.innerWidth * 100) + '%'); });
 
   /* sticky photo pane in Track record */
   var pane = document.querySelector('.pane');
@@ -1374,6 +1408,21 @@
       var total = r.height - vh, sp = narrow() ? 1 : clamp(-r.top / Math.max(total, 1), 0, 1);
       var lit = Math.floor(sp * 1.15 * words.length);
       words.forEach(function(w, i){ w.classList.toggle('on', i < lit); });
+    }
+
+    /* paragraphs light up as they pass through the reading zone */
+    lits.forEach(function(L){
+      var r = L.el.getBoundingClientRect();
+      var p = clamp((vh * .82 - r.top) / (vh * .38 + r.height * .5), 0, 1);
+      var n = Math.floor(p * L.words.length * 1.05);
+      L.words.forEach(function(w, i){ w.classList.toggle('on', i < n); });
+    });
+    /* start / end frame crossfade on the Who photo */
+    if (framesEnd) {
+      var fr = framesBox.getBoundingClientRect();
+      var fp = clamp((vh * .55 - fr.top) / (vh * .6), 0, 1);
+      framesEnd.style.opacity = fp;
+      if (framesCap) { framesCap.querySelector('.a').style.opacity = 1 - fp; framesCap.querySelector('.b').style.opacity = fp; }
     }
 
     /* gallery */
