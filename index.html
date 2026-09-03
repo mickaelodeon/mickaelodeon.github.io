@@ -232,6 +232,8 @@
   .card .ph::after{content:"";position:absolute;inset:0;border:1px solid var(--brass-ink);opacity:0;transition:opacity .6s ease;pointer-events:none}
   .card.focus .ph::after{opacity:.8}
   .card.focus figcaption{color:rgba(246,244,239,.95)}
+  .moments .chap{display:inline-block;margin-left:.6rem;padding-left:.8rem;border-left:1px solid var(--line-ink);color:var(--brass-ink);transition:opacity .35s}
+  .moments .chap.sw{opacity:0}
   .moments .count{font-family:var(--display);font-size:1.1rem;font-variant-numeric:tabular-nums;color:rgba(246,244,239,.6);min-width:5ch;text-align:right}
   .moments .count b{color:var(--brass-ink);font-weight:400}
   .dragcur{position:fixed;left:0;top:0;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:rgba(217,182,92,.92);color:var(--ink);font-size:.72rem;font-weight:700;letter-spacing:.04em;display:grid;place-items:center;pointer-events:none;z-index:120;opacity:0;scale:.5;transition:opacity .25s,scale .25s var(--ease);will-change:transform}
@@ -406,10 +408,11 @@
   .moments{padding:0;background:var(--ink);color:var(--paper)}
   .moments::before{display:none}
   .moments .pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .moments .head,.moments .ctrl{position:relative;z-index:1}
   .moments .head{padding:0 clamp(20px,5vw,56px);margin-bottom:2rem}
   .moments .head h2{color:var(--paper)}
   .moments .head p{color:rgba(246,244,239,.65);margin:.75rem 0 0}
-  .track{display:flex;gap:clamp(1rem,2.5vw,2.25rem);padding:0 clamp(20px,5vw,56px);will-change:transform;perspective:1200px}
+  .track{position:relative;z-index:1;display:flex;gap:clamp(1rem,2.5vw,2.25rem);padding:0 clamp(20px,5vw,56px);will-change:transform;perspective:1200px}
   .card{flex:0 0 auto;width:min(58vw,560px);will-change:transform}
   .card.tall{width:min(38vw,360px)}
   .card .ph{aspect-ratio:4/3;overflow:hidden;border-radius:2px;background:#0b1422}
@@ -866,7 +869,7 @@
         <li><div class="y">2023</div><p class="m">President of the Alliance, Chair of the Council of Presidents, Class Mayor.</p></li>
         <li><div class="y">2024</div><p class="m">Most Outstanding Project. Dean's List, still every semester.</p></li>
         <li><div class="y">2025</div><p class="m">Capstone Project Manager. Champion and Best in Booth at the first CCS Exhibit.</p></li>
-        <li><div class="y">2026</div><p class="m">ICETT Seoul, LAMBO champion, InnovateCebu 2nd, Cum Laude Top 4. Then the faculty.</p></li>
+        <li><div class="y">2026</div><p class="m">ICETT Seoul, LAMBO champion, InnovateCebu 2nd runner-up, Cum Laude Top 4. Then the faculty.</p></li>
       </ol>
     </div>
     <div class="record-grid">
@@ -918,7 +921,8 @@
           <figure class="ledger-img"><img src="images/lambo-check.jpg" alt="John Michael holding the first-place check at LAMBO 2026." loading="lazy"></figure>
           <ul>
             <li class="reveal" style="--d:.15s"><span>Champion, LAMBO 2026 <span class="sub">Cebu's AI Business Summit</span></span><span class="yr">2026</span></li>
-            <li class="reveal" style="--d:.20s"><span>2nd Place, InnovateCebu Finalist</span><span class="yr">2026</span></li>
+            <li class="reveal" style="--d:.20s"><span>2nd Runner-Up, InnovateCebu 2026 <span class="sub">Student category, for an AI-powered system for papaya disease identification. Aboitiz Foundation and Visayan Electric.</span></span><span class="yr">2026</span></li>
+            <li class="reveal" style="--d:.22s"><span>2nd Place, Lightning Pitch Competition <span class="sub">12th UC ICT Congress, Cebu Coliseum</span></span><span class="yr">2026</span></li>
             <li class="reveal" style="--d:.25s"><span>Champion, Lightning Pitch Competition <span class="sub">CCS Exhibit, pioneer year</span></span><span class="yr">2025–2026</span></li>
             <li class="reveal" style="--d:.30s"><span>Best in Booth <span class="sub">CCS Exhibit, pioneer year</span></span><span class="yr">2025–2026</span></li>
             <li class="reveal" style="--d:.35s"><span>Most Outstanding Project</span><span class="yr">2024–2025</span></li>
@@ -962,30 +966,42 @@
     </svg>
     <div class="head">
       <h2>Moments</h2>
-      <p>The parts of the résumé that had people in them.</p>
+      <p>The parts of the résumé that had people in them. <span class="chap" data-chap aria-live="polite"></span></p>
     </div>
     <div class="track" data-track>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-check.jpg" alt="" loading="lazy"></div><figcaption><b>LAMBO 2026</b>Cebu's AI Business Summit at Waterfront Cebu. First place, Visayas Visionaries.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-handshake.jpg" alt="" loading="lazy"></div><figcaption><b>The moment it was called</b>Still processing it, apparently.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-stage.jpg" alt="" loading="lazy"></div><figcaption><b>On stage with the team</b>The people who did the work with me.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-office.jpg" alt="" loading="lazy"></div><figcaption><b>Bringing it home</b>Presenting the win back at UC.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/lambo-hall.jpg" alt="" loading="lazy"></div><figcaption><b>The whole room</b>Operators, founders, and one very nervous student team.</figcaption></figure>
-      <figure class="card tall" tabindex="0"><div class="ph"><img src="images/papaya-field.jpg" alt="" loading="lazy"></div><figcaption><b>PAPAIA fieldwork</b>Papaya farms first, code second.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/papaia-team.jpg" alt="" loading="lazy"></div><figcaption><b>The PAPAIA team</b>Whiteboard full, laptop open.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/icett-cert.jpg" alt="" loading="lazy"></div><figcaption><b>ICETT 2026, Seoul</b>Oral presentation at the 12th International Conference on Education and Training Technologies.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/excellence-banner.jpg" alt="" loading="lazy"></div><figcaption><b>On the wall</b>Two entries on the CCS Celebrating Excellence board: InnovateCebu and ICETT.</figcaption></figure>
-      <figure class="card tall" tabindex="0"><div class="ph"><img src="images/lexmark.jpg" alt="" loading="lazy"></div><figcaption><b>Lexmark</b>Intern days with Global Business Services.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/hinirang.jpg" alt="" loading="lazy"></div><figcaption><b>Academic Scholars Alliance</b>Recognition night with the officers.</figcaption></figure>
-      <figure class="card" tabindex="0"><div class="ph"><img src="images/asa-group.jpg" alt="" loading="lazy"></div><figcaption><b>The Alliance</b>Roughly 1,400 scholars. This is a few of them.</figcaption></figure>
-      <figure class="card tall" tabindex="0"><div class="ph"><img src="images/senior-night.jpg" alt="" loading="lazy"></div><figcaption><b>CCS Senior Night</b>The Royal Masquerade, medals included.</figcaption></figure>
-      <figure class="card tall" tabindex="0"><div class="ph"><img src="images/grad-sea.jpg" alt="" loading="lazy"></div><figcaption><b>Done</b>Cap in hand, diploma in the other.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="LAMBO 2026"><div class="ph"><img src="images/lambo-check.jpg" alt="" loading="lazy"></div><figcaption><b>LAMBO 2026</b>Cebu's AI Business Summit at Waterfront Cebu. First place, Visayas Visionaries.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="LAMBO 2026"><div class="ph"><img src="images/lambo-handshake.jpg" alt="" loading="lazy"></div><figcaption><b>The moment it was called</b>Still processing it, apparently.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="LAMBO 2026"><div class="ph"><img src="images/lambo-stage.jpg" alt="" loading="lazy"></div><figcaption><b>On stage with the team</b>The people who did the work with me.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="LAMBO 2026"><div class="ph"><img src="images/lambo-office.jpg" alt="" loading="lazy"></div><figcaption><b>Bringing it home</b>Presenting the win back at UC.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="InnovateCebu 2026"><div class="ph"><img src="images/innovate-pitch.jpg" alt="" loading="lazy"></div><figcaption><b>Pitching PAPAIA</b>In front of the InnovateCebu panel, Aboitiz and Visayan Electric in the room.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="InnovateCebu 2026"><div class="ph"><img src="images/innovate-stage.jpg" alt="" loading="lazy"></div><figcaption><b>2nd runner-up, student category</b>₱50,000 and a plaque for an AI-powered system for papaya disease identification.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="InnovateCebu 2026"><div class="ph"><img src="images/innovate-plaque.jpg" alt="" loading="lazy"></div><figcaption><b>The plaque</b>Awarding ceremony at the Aboitiz corporate office, 5 May 2026.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="InnovateCebu 2026"><div class="ph"><img src="images/innovate-check.jpg" alt="" loading="lazy"></div><figcaption><b>Back at the desk</b>The cheque, briefly, before it went to the team.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Research"><div class="ph"><img src="images/papaya-field.jpg" alt="" loading="lazy"></div><figcaption><b>PAPAIA fieldwork</b>Papaya farms first, code second.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="Research"><div class="ph"><img src="images/papaia-team.jpg" alt="" loading="lazy"></div><figcaption><b>The PAPAIA team</b>Whiteboard full, laptop open.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Research"><div class="ph"><img src="images/papaia-ribbons.jpg" alt="" loading="lazy"></div><figcaption><b>Three ribbons on the poster</b>Capstone 2 passer. InnovateCebu finalist. ICETT 2026 accepted.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="Research"><div class="ph"><img src="images/icett-cert.jpg" alt="" loading="lazy"></div><figcaption><b>ICETT 2026, Seoul</b>Oral presentation at the 12th International Conference on Education and Training Technologies.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Research"><div class="ph"><img src="images/research-congress.jpg" alt="" loading="lazy"></div><figcaption><b>5th CCS Research Congress</b>Intelligent Futures, UC Main, 13 May 2026.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="Research"><div class="ph"><img src="images/research-group.jpg" alt="" loading="lazy"></div><figcaption><b>The research cohort</b>Presenters on stage at the Research Congress.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Research"><div class="ph"><img src="images/research-cert.jpg" alt="" loading="lazy"></div><figcaption><b>After the hall emptied</b>One more certificate, one quiet auditorium.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="CCS Exhibit and Congress"><div class="ph"><img src="images/exhibit-certs.jpg" alt="" loading="lazy"></div><figcaption><b>CCS Exhibit 2026</b>Best in Booth, first in the pitching competition, Best in Capstone for social relevance. All for PAPAIA.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="CCS Exhibit and Congress"><div class="ph"><img src="images/ictcongress-pitch.jpg" alt="" loading="lazy"></div><figcaption><b>Lightning Pitch, UC ICT Congress</b>Second place at the Cebu Coliseum, 22 April 2026.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="CCS Exhibit and Congress"><div class="ph"><img src="images/awards-stage.jpg" alt="" loading="lazy"></div><figcaption><b>Awarding night</b>With the rest of the CCS delegation.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="CCS Exhibit and Congress"><div class="ph"><img src="images/excellence-banner.jpg" alt="" loading="lazy"></div><figcaption><b>On the wall</b>Two entries on the CCS Celebrating Excellence board: InnovateCebu and ICETT.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Lexmark"><div class="ph"><img src="images/lexmark.jpg" alt="" loading="lazy"></div><figcaption><b>Lexmark</b>Intern days with Global Business Services.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Lexmark"><div class="ph"><img src="images/lexmark-window.jpg" alt="" loading="lazy"></div><figcaption><b>Late afternoon at the office</b>Lexmark lanyard, InnovateCebu shirt. Both true at once.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Lexmark"><div class="ph"><img src="images/dohe-forum.jpg" alt="" loading="lazy"></div><figcaption><b>Building the next wave</b>In the audience at a DOHE forum on Cebu tech talent.</figcaption></figure>
+      <figure class="card" tabindex="0" data-chapter="Alliance and honors"><div class="ph"><img src="images/hinirang.jpg" alt="" loading="lazy"></div><figcaption><b>Academic Scholars Alliance</b>Recognition night with the officers.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Alliance and honors"><div class="ph"><img src="images/deans-merit.jpg" alt="" loading="lazy"></div><figcaption><b>Certificate of Merit</b>For the Dean's List. One of eight.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Alliance and honors"><div class="ph"><img src="images/senior-night.jpg" alt="" loading="lazy"></div><figcaption><b>CCS Senior Night</b>The Royal Masquerade, medals included.</figcaption></figure>
+      <figure class="card tall" tabindex="0" data-chapter="Alliance and honors"><div class="ph"><img src="images/grad-sea.jpg" alt="" loading="lazy"></div><figcaption><b>Done</b>Cap in hand, diploma in the other.</figcaption></figure>
     </div>
     <div class="ctrl">
       <button class="btn" type="button" data-prev aria-label="Previous photo"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
       <button class="btn" type="button" data-next aria-label="Next photo"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
       <div class="rail" aria-hidden="true"><i data-rail></i></div>
       <span class="hint">Scroll, drag, or use the arrow keys. Click a photo to enlarge.</span>
-      <span class="count" data-gcount><b>01</b> / 14</span>
+      <span class="count" data-gcount><b>01</b> / 26</span>
     </div>
   </div>
 </section>
@@ -1158,8 +1174,9 @@
   });
 
   /* moments: drag cursor + focus card + counter */
-  var dragcur = document.querySelector('[data-dragcur]'), gcount = document.querySelector('[data-gcount]');
-  var trackEl = document.querySelector('[data-track]');
+  var dragcur = document.querySelector('[data-dragcur]'), gcount = document.querySelector('[data-gcount]'), chapEl = document.querySelector('[data-chap]'), chapCur = '';
+  function setChap(name){ if (!chapEl || name === chapCur) return; chapCur = name; chapEl.classList.add('sw'); setTimeout(function(){ chapEl.textContent = name; chapEl.classList.remove('sw'); }, 300); }
+  var trackEl = document.querySelector('[data-track]'), cardsInit = trackEl ? trackEl.children : null;
   if (trackEl && dragcur && !rm) {
     document.addEventListener('pointermove', function(e){
       if (e.pointerType && e.pointerType !== 'mouse') return;
@@ -1202,6 +1219,7 @@
   }
 
   /* count-up numbers */
+  if (chapEl && cardsInit) setChap(cardsInit[0].dataset.chapter);
   var counters = document.querySelectorAll('[data-count]');
   if (counters.length && 'IntersectionObserver' in window) {
     var fmt = function(n, el){ return el.dataset.format === 'comma' ? n.toLocaleString('en-US') : String(n); };
@@ -1373,7 +1391,7 @@
         c.style.transform = 'translateY(' + (Math.abs(d) * 18) + 'px)';
         var im = c.firstElementChild.firstElementChild;
         im.style.objectPosition = (50 + d * 12) + '% 50%';   /* gentle parallax inside the frame, never a stretch */
-        if (Math.abs(d) < .22) { if (!c.classList.contains('focus')) { c.classList.add('focus'); if (gcount) gcount.innerHTML = '<b>' + String(cards.indexOf(c) + 1).padStart(2, '0') + '</b> / ' + cards.length; } }
+        if (Math.abs(d) < .22) { if (!c.classList.contains('focus')) { c.classList.add('focus'); if (gcount) gcount.innerHTML = '<b>' + String(cards.indexOf(c) + 1).padStart(2, '0') + '</b> / ' + cards.length; setChap(c.dataset.chapter); } }
         else c.classList.remove('focus');
       });
       moments.style.setProperty('--hue', (gp * 50) + 'deg');
