@@ -66,6 +66,12 @@
   .ring{position:absolute;right:6vw;top:50%;width:min(64vmin,620px);aspect-ratio:1;margin-top:calc(min(64vmin,620px) / -2);border:1px solid rgba(217,182,92,.22);border-radius:50%;pointer-events:none;animation:spin 80s linear infinite}
   .ring::after{content:"";position:absolute;left:50%;top:-3px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--brass-ink);box-shadow:0 0 14px rgba(217,182,92,.8)}
   @keyframes spin{to{transform:rotate(360deg)}}
+  .constellation{position:absolute;left:4vw;bottom:6vh;width:min(38vw,420px);height:auto;pointer-events:none;opacity:.55}
+  .constellation polyline{fill:none;stroke:rgba(217,182,92,.55);stroke-width:.7;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 3.2s var(--ease-in-out) 1.2s forwards}
+  .constellation polyline:nth-child(2){animation-delay:2.2s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .constellation circle{fill:var(--brass-ink);opacity:0;animation:fade .8s ease forwards}
+  .constellation circle:nth-of-type(1){animation-delay:1.2s}.constellation circle:nth-of-type(2){animation-delay:1.5s}.constellation circle:nth-of-type(3){animation-delay:1.8s}.constellation circle:nth-of-type(4){animation-delay:2.1s}.constellation circle:nth-of-type(5){animation-delay:2.4s}.constellation circle:nth-of-type(6){animation-delay:2.7s}.constellation circle:nth-of-type(7){animation-delay:2.6s}.constellation circle:nth-of-type(8){animation-delay:2.9s}.constellation circle:nth-of-type(9){animation-delay:3.2s}
   .spot{position:absolute;inset:0;pointer-events:none;background:radial-gradient(520px circle at var(--mx,70%) var(--my,40%),rgba(217,182,92,.10),transparent 60%);transition:opacity .6s;opacity:0}
   .hero:hover .spot{opacity:1}
   .hairline{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;overflow:hidden}
@@ -113,6 +119,8 @@
   .finale .sign.in span{opacity:1;transform:none;filter:none}
   .finale .sign span:nth-child(2){transition-delay:.25s}.finale .sign span:nth-child(3){transition-delay:.5s}
   .finale footer .inner{padding-top:3rem;padding-bottom:3rem;align-items:flex-end}
+  .beyond{font-family:var(--display);font-size:clamp(1.25rem,2.2vw,1.7rem);font-variation-settings:"opsz" 48;line-height:1.35;color:rgba(246,244,239,.85);max-width:42ch;margin:0 0 1rem;padding-top:1rem;position:relative;z-index:1}
+  .beyond::first-letter{color:var(--brass-ink)}
   .finale .thin{margin-top:5rem;text-align:center;font-size:.8rem;color:rgba(246,244,239,.35);position:relative;z-index:1}
 
   /* ---------- intro curtain ---------- */
@@ -126,7 +134,7 @@
   .intro .iskip{position:absolute;bottom:2rem;font-size:.8rem;color:rgba(246,244,239,.45);font-family:var(--sans)}
   .intro.out{animation:iout .9s var(--ease-in-out) forwards}
   @keyframes iout{to{clip-path:inset(0 0 100% 0)}}
-  body.pre .rise,body.pre .portrait,body.pre .portrait img,body.pre .portrait figcaption,body.pre .hero .cue{animation-play-state:paused}
+  body.pre .constellation polyline,body.pre .constellation circle,body.pre .rise,body.pre .portrait,body.pre .portrait img,body.pre .portrait figcaption,body.pre .hero .cue{animation-play-state:paused}
 
   /* ---------- dot rail ---------- */
   .rail-nav{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:14px;opacity:0;transition:opacity .5s;pointer-events:none}
@@ -147,12 +155,15 @@
   .numbers .l{margin-top:.6rem;color:var(--muted);font-size:.95rem;max-width:18ch}
 
   /* ---------- now (courses + tools) ---------- */
-  .courses{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .courses{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .strengths{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem) clamp(2rem,4vw,4rem)}
+  .strengths h3{font-size:1.2rem;margin-bottom:.4rem}
+  .strengths p{margin:0;color:var(--muted);font-size:.97rem}
   .courses > div{background:var(--paper);padding:1.8rem 1.6rem;position:relative;overflow:hidden}
   .courses > div::after{content:"";position:absolute;inset:0;background:radial-gradient(360px circle at var(--px,50%) var(--py,50%),rgba(176,138,51,.10),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
   .courses > div:hover::after{opacity:1}
   .courses .code{font-size:.85rem;color:var(--brass);font-weight:600;margin-bottom:.4rem}
-  .courses h3{margin-bottom:.5rem}
+  .courses h3{margin-bottom:.5rem;font-size:1.25rem}
   .courses p{margin:0;color:var(--muted)}
   .also{margin-top:1.5rem;color:var(--muted);max-width:none}
   .tools{margin-top:clamp(2rem,4vw,3rem);display:flex;flex-wrap:wrap;gap:.6rem}
@@ -348,6 +359,7 @@
   footer .sign{font-family:var(--display);font-size:1.6rem;color:var(--paper);font-variation-settings:"opsz" 48;line-height:1.2}
 
   /* ---------- responsive ---------- */
+  @media (max-width:1000px){.courses{grid-template-columns:1fr 1fr}}
   @media (max-width:900px){
     .three,.games,.channels{grid-template-columns:1fr 1fr}
     .record-grid{grid-template-columns:1fr}
@@ -377,9 +389,9 @@
     .card.tall{width:60vw;scroll-snap-align:start}
     .card.tall .ph{aspect-ratio:3/4}
     .moments .ctrl .btn,.moments .hint{display:none}
-    .ring,.aurora,.ghost.br,.rail-nav{display:none}
+    .ring,.aurora,.ghost.br,.rail-nav,.constellation{display:none}
     .numbers .grid{grid-template-columns:1fr 1fr}
-    .courses{grid-template-columns:1fr}
+    .courses,.strengths{grid-template-columns:1fr}
     .totop{right:14px;bottom:14px}
   }
   @media (prefers-reduced-motion:reduce){
@@ -393,6 +405,7 @@
     .progress,.hero .cue{display:none}
     .orb,.ring,.aurora,.star,.hairline::before,.ghost,.warm{animation:none}
     .intro{display:none}
+    .constellation polyline{stroke-dashoffset:0;animation:none}.constellation circle{opacity:1;animation:none}
     .totop .fg{transition:none}
     .finale .sign span{opacity:1;transform:none;filter:none;transition:none}
     .card .ph img,.lb,.lb img{transition:none}
@@ -400,7 +413,7 @@
   /* ---------- print: a clean CV ---------- */
   @media print{
     body{background:#fff;color:#000;font-size:11pt}
-    body::before,.progress,.intro,.rail-nav,.totop,.orb,.ring,.aurora,.stars,.spot,.hairline,.ghost,.warm,.cue,.lb,.toast,.copy,.moments .ctrl,.statement .src,.ledger-img{display:none !important}
+    body::before,.progress,.intro,.rail-nav,.totop,.orb,.ring,.constellation,.aurora,.stars,.spot,.hairline,.ghost,.warm,.cue,.lb,.toast,.copy,.moments .ctrl,.statement .src,.ledger-img{display:none !important}
     .hero{position:static;height:auto;background:#fff;color:#000;padding:0 0 1.5rem}
     .hero-copy,.portrait{opacity:1 !important;transform:none !important}
     .statement p{max-width:none}
@@ -446,7 +459,13 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
-  <div class="aurora" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div><div class="stars" data-stars="34" aria-hidden="true"></div><div class="ring r2" aria-hidden="true"></div><div class="ring" aria-hidden="true"></div><div class="spot" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div><div class="stars" data-stars="34" aria-hidden="true"></div><div class="ring r2" aria-hidden="true"></div><div class="ring" aria-hidden="true"></div>
+  <svg class="constellation" viewBox="0 0 400 300" aria-hidden="true">
+    <polyline points="40,60 110,40 170,95 240,70 300,130 350,110" />
+    <polyline points="170,95 150,180 210,230 280,205" />
+    <circle cx="40" cy="60" r="2"/><circle cx="110" cy="40" r="2.6"/><circle cx="170" cy="95" r="3"/><circle cx="240" cy="70" r="2"/><circle cx="300" cy="130" r="2.6"/><circle cx="350" cy="110" r="2"/><circle cx="150" cy="180" r="2"/><circle cx="210" cy="230" r="2.6"/><circle cx="280" cy="205" r="2"/>
+  </svg>
+  <div class="spot" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
       <p class="kicker rise">Meet your instructor</p>
@@ -505,7 +524,7 @@
   <div class="wrap">
     <div class="grid">
       <div class="reveal"><div class="n" data-count="1400" data-format="comma">0</div><div class="l">scholars in the Alliance I led as President</div></div>
-      <div class="reveal" style="--d:.12s"><div class="n" data-count="6">0</div><div class="l">consecutive semesters on the Dean's List</div></div>
+      <div class="reveal" style="--d:.12s"><div class="n" data-count="8">0</div><div class="l">semesters on the Dean's List, every single one</div></div>
       <div class="reveal" style="--d:.24s"><div class="n"><small>Top</small><span data-count="4">0</span></div><div class="l">of the graduating batch, Cum Laude</div></div>
       <div class="reveal" style="--d:.36s"><div class="n" data-count="1">0</div><div class="l">international paper presented in Seoul before graduating</div></div>
     </div>
@@ -520,22 +539,46 @@
       <h2>What I do now</h2>
       <p>The courses you might have me for, and what I bring into them.</p>
     </div>
+    <p class="tools-l reveal" style="--d:.05s">Courses I handle this semester</p>
     <div class="courses">
-      <div class="reveal" style="--d:.1s" data-glow>
-        <div class="code">IMDBSYS21</div>
-        <h3>Database Management System 1</h3>
-        <p>Relational design and SQL, from first SELECT to a schema you can defend. Expect to write a lot of queries and to explain why they work.</p>
+      <div class="reveal" style="--d:.10s" data-glow>
+        <h3>Introduction to Computing</h3>
+        <p>How computers, data, and the internet actually work, and the habits that make you good at using them.</p>
       </div>
-      <div class="reveal" style="--d:.22s" data-glow>
-        <div class="code">Entrepreneurship 101</div>
-        <h3>Discovering Entrepreneurship</h3>
-        <p>Delivered through the Cisco Networking Academy course. Less theory, more pitching: you will build and present an idea, the same way I did in competition.</p>
+      <div class="reveal" style="--d:.18s" data-glow>
+        <h3>Computer Programming 1</h3>
+        <p>Your first real code: variables, control flow, functions, and the discipline of making a program do exactly what you meant.</p>
+      </div>
+      <div class="reveal" style="--d:.26s" data-glow>
+        <h3>Computer Programming 2</h3>
+        <p>Building on the basics: data structures, objects, and writing programs that other people can read and maintain.</p>
+      </div>
+      <div class="reveal" style="--d:.34s" data-glow>
+        <h3>Information Management (DBSYS 1)</h3>
+        <p>Relational design and SQL, from your first SELECT to a schema you can defend. My favourite language, so expect a lot of queries.</p>
+      </div>
+      <div class="reveal" style="--d:.42s" data-glow>
+        <h3>Testing &amp; Quality Assurance</h3>
+        <p>How to break software on purpose, prove it works, and design for the person who has to use it. One of the subjects I enjoy most.</p>
+      </div>
+      <div class="reveal" style="--d:.50s" data-glow>
+        <h3>The Entrepreneurial Mind</h3>
+        <p>Less theory, more pitching. You will build and present an idea, the same way I did in competition.</p>
       </div>
     </div>
-    <p class="also reveal" style="--d:.3s">Outside class, I sit as a panelist on the college's semestral capstone defenses and handle student consultations, so I see what strong projects look like before and after they're graded.</p>
-    <p class="tools-l reveal" style="--d:.35s">Tools I worked with at Lexmark and still lean on</p>
-    <div class="tools reveal" style="--d:.4s">
-      <span>SQL</span><span>Power BI</span><span>Excel VBA</span><span>SAP</span><span>ServiceNow</span><span>Microsoft Dynamics 365</span><span>Siebel</span><span>SharePoint</span><span>AI as a working tool</span>
+    <p class="also reveal" style="--d:.3s">Outside class, I sit as a panelist on the college's capstone defenses and handle student consultations, so I see what strong projects look like before and after they're graded.</p>
+
+    <p class="tools-l reveal" style="--d:.35s">Where I'm strongest</p>
+    <div class="strengths reveal" style="--d:.4s">
+      <div><h3>Project management</h3><p>Scoping, coordinating, and shipping on a deadline. The thing I did for every org, competition, and capstone I've been part of.</p></div>
+      <div><h3>SQL and data manipulation</h3><p>The language I'd pick over any other. Turning messy data into an answer someone can act on.</p></div>
+      <div><h3>Excel, intermediate to advanced</h3><p>Automating tasks, commands, and reports with formulas and VBA so the boring parts run themselves.</p></div>
+      <div><h3>Testing and human–computer interaction</h3><p>Finding where software fails people, then fixing the experience. The work I have the most fun doing.</p></div>
+    </div>
+
+    <p class="tools-l reveal" style="--d:.45s">Tools I worked with at Lexmark and still lean on</p>
+    <div class="tools reveal" style="--d:.5s">
+      <span>SQL</span><span>Excel &amp; VBA</span><span>Power BI</span><span>SAP</span><span>ServiceNow</span><span>Microsoft Dynamics 365</span><span>Siebel</span><span>SharePoint</span><span>AI as a working tool</span>
     </div>
   </div>
 </section>
@@ -806,6 +849,9 @@
 </section>
 
 <footer>
+  <div class="wrap">
+    <p class="beyond reveal">Beyond the job description: if you want to grow, I'll help however I can. Nurturing people who want to get better is the part of this I would do anyway.</p>
+  </div>
   <div class="wrap"><div class="inner">
     <div class="sign reveal" data-sign><span>Let's learn.</span><span>Let's build.</span><span>Let's challenge ourselves.</span></div>
     <div class="reveal" style="--d:.6s">John Michael Eborda<br>College of Computer Studies, University of Cebu<br><span style="color:rgba(246,244,239,.4)">Sir Michael, if you're in my class.</span></div>
