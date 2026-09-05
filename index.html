@@ -1278,17 +1278,17 @@
       var t = ctx.currentTime, n = big ? 7 : 5, base = SCALE[Math.floor(Math.random() * 4)] * 2, gap = big ? .055 : .07;
       for (var k = 0; k < n; k++){
         var f = base * Math.pow(2, [0, 2, 4, 7, 9, 11, 14][k] / 12);   /* pentatonic climb */
-        pluck(f, t + k * gap, (big ? .13 : .1) * (1 - k * .05), 1.6 + k * .12);
+        pluck(f, t + k * gap, (big ? .065 : .05) * (1 - k * .05), 1.6 + k * .12);
       }
       /* shimmer: bright filtered noise that lifts and fades */
       var buf = ctx.createBuffer(1, ctx.sampleRate * .8, ctx.sampleRate), d = buf.getChannelData(0);
       for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1);
       var src = ctx.createBufferSource(); src.buffer = buf;
       var f2 = ctx.createBiquadFilter(); f2.type = 'bandpass'; f2.Q.value = 6; f2.frequency.setValueAtTime(4000, t); f2.frequency.exponentialRampToValueAtTime(9000, t + .5);
-      var g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(big ? .05 : .035, t + .08); g.gain.exponentialRampToValueAtTime(.0004, t + .7);
+      var g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(big ? .025 : .018, t + .08); g.gain.exponentialRampToValueAtTime(.0004, t + .7);
       src.connect(f2); f2.connect(g); g.connect(master); g.connect(reverb()); src.start(t); src.stop(t + .8);
       /* a single high bell on top, delayed, like the last star landing */
-      pluck(base * 4, t + n * gap + .05, big ? .12 : .08, 2.4);
+      pluck(base * 4, t + n * gap + .05, big ? .06 : .04, 2.4);
     }
     function whoosh(){
       if (!on || !ctx) return;
