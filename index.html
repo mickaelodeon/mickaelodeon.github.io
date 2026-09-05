@@ -1265,38 +1265,60 @@
       o.connect(g); o2.connect(g2); g2.connect(g); g.connect(master); g.connect(reverb());
       o.start(at); o2.start(at); o.stop(at + dur + .1); o2.stop(at + dur + .1);
     }
-    /* chord progression in D major: Dadd9 – A/C# – Bm7 – Gadd9  (I – V – vi – IV), 8 s per chord */
+    /* anthem loop in D major: Bm – G – D – A (vi – IV – I – V), 104 BPM, 2 bars per chord */
     var CHORDS = [
-      [146.83, 220.00, 293.66, 329.63, 369.99],   /* D  A  D  E  F#  */
-      [138.59, 220.00, 277.18, 329.63, 440.00],   /* C# A  C# E  A   */
-      [123.47, 185.00, 220.00, 293.66, 369.99],   /* B  F# A  D  F#  */
-      [98.00,  146.83, 196.00, 246.94, 293.66]    /* G  D  G  B  D   */
+      [123.47, 185.00, 246.94, 293.66, 369.99],   /* B  F# B  D  F#  */
+      [98.00,  146.83, 196.00, 246.94, 293.66],   /* G  D  G  B  D   */
+      [146.83, 220.00, 293.66, 369.99, 440.00],   /* D  A  D  F# A   */
+      [110.00, 164.81, 220.00, 277.18, 329.63]    /* A  E  A  C# E   */
     ];
-    var padTimer = null, arpTimer = null, chordIdx = 0;
+    var BPM = 104, BEAT = 60 / BPM, BAR = BEAT * 4;
+    var pad = null, seqTimer = null, chordIdx = 0, bar = 0, nextBar = 0;
     function startPad(){
       if (pad) return;
       var t = ctx.currentTime;
-      var filt = ctx.createBiquadFilter(); filt.type = 'lowpass'; filt.frequency.value = 900; filt.Q.value = .4;
+      var filt = ctx.createBiquadFilter(); filt.type = 'lowpass'; filt.frequency.value = 1100; filt.Q.value = .4;
       var padGain = ctx.createGain(); padGain.gain.value = 0; filt.connect(padGain); padGain.connect(master); padGain.connect(reverb());
-      var lfo = ctx.createOscillator(), lfoG = ctx.createGain(); lfo.frequency.value = .06; lfoG.gain.value = 320; lfo.connect(lfoG); lfoG.connect(filt.frequency); lfo.start();
       var voices = [];
       for (var i = 0; i < 5; i++) (function(i){
         var osc = ctx.createOscillator(), g = ctx.createGain(); osc.type = i < 2 ? 'sine' : 'triangle'; osc.frequency.value = CHORDS[0][i];
-        g.gain.value = [ .30, .16, .11, .09, .07 ][i]; osc.connect(g); g.connect(filt); osc.start();
-        var vib = ctx.createOscillator(), vg = ctx.createGain(); vib.frequency.value = .11 + i * .04; vg.gain.value = 2 + i; vib.connect(vg); vg.connect(osc.detune); vib.start();
+        g.gain.value = [ .26, .14, .10, .08, .06 ][i]; osc.connect(g); g.connect(filt); osc.start();
+        var vib = ctx.createOscillator(), vg = ctx.createGain(); vib.frequency.value = .12 + i * .04; vg.gain.value = 2 + i; vib.connect(vg); vg.connect(osc.detune); vib.start();
         voices.push(osc);
       })(i);
-      var setChord = function(k){ var now = ctx.currentTime; CHORDS[k].forEach(function(f, i){ voices[i].frequency.cancelScheduledValues(now); voices[i].frequency.setTargetAtTime(f, now, .9); }); };
-      padTimer = setInterval(function(){ chordIdx = (chordIdx + 1) % CHORDS.length; setChord(chordIdx); }, 8000);
-      /* arpeggios: gentle plucks from the current chord, two octaves up, loose rhythm */
-      var arp = function(){
-        if (!on) { arpTimer = setTimeout(arp, 800); return; }
-        var ch = CHORDS[chordIdx], now = ctx.currentTime, n = 3 + Math.floor(Math.random() * 3), step = .32 + Math.random() * .12;
-        for (var j = 0; j < n; j++){ var f = ch[1 + Math.floor(Math.random() * 4)] * (Math.random() < .5 ? 2 : 4); pluck(f, now + j * step, .16, 2.6); }
-        arpTimer = setTimeout(arp, 2600 + Math.random() * 3400);
+      var setChord = function(k, at){ CHORDS[k].forEach(function(f, i){ voices[i].frequency.setTargetAtTime(f, at, .12); }); };
+      /* low heartbeat: soft sub thump on beats 1 and 3 */
+      var thump = function(at, vol){
+        var o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine';
+        o.frequency.setValueAtTime(110, at); o.frequency.exponentialRampToValueAtTime(48, at + .18);
+        g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(vol, at + .012); g.gain.exponentialRampToValueAtTime(.0006, at + .42);
+        o.connect(g); g.connect(master); o.start(at); o.stop(at + .5);
       };
-      arpTimer = setTimeout(arp, 1200);
-      padGain.gain.linearRampToValueAtTime(1.0, t + 4);
+      /* schedule one bar at a time, a little ahead of the clock */
+      var scheduleBar = function(at){
+        var k = Math.floor(bar / 2) % CHORDS.length, ch = CHORDS[k], phase = bar % 8;   /* 8-bar phrase */
+        if (bar % 2 === 0) setChord(k, at);
+        thump(at, .5); thump(at + BEAT * 2, .38);
+        /* driving ostinato: eighth notes climbing the chord, an octave above the pad; intensity builds through the phrase */
+        var lift = .55 + (phase / 7) * .45, pat = [1, 2, 3, 4, 3, 2, 3, 4];
+        for (var e = 0; e < 8; e++){
+          var f = ch[pat[e]] * 2 * (phase >= 6 && e >= 4 ? 2 : 1);   /* last two bars jump an octave */
+          pluck(f, at + e * BEAT / 2, .11 * lift * (e % 2 ? .8 : 1), 1.1);
+        }
+        /* melody fragment on bars 4 and 8: a rising call over the top */
+        if (phase === 3 || phase === 7){ [3, 4, 3, 4].forEach(function(ix, j){ pluck(ch[ix] * 4, at + BEAT * 2 + j * BEAT / 2, .12, 1.8); }); pluck(ch[4] * 4 * (phase === 7 ? 2 : 1.5), at + BAR - BEAT / 2, .15, 2.6); }
+        /* swell into the next phrase */
+        if (phase === 7){ filt.frequency.setValueAtTime(1100, at); filt.frequency.linearRampToValueAtTime(2600, at + BAR); filt.frequency.setTargetAtTime(1100, at + BAR, .6); }
+        bar++;
+      };
+      nextBar = t + .1;
+      var tick = function(){
+        if (!on) { seqTimer = setTimeout(tick, 200); return; }
+        while (nextBar < ctx.currentTime + .6){ scheduleBar(nextBar); nextBar += BAR; }
+        seqTimer = setTimeout(tick, 120);
+      };
+      tick();
+      padGain.gain.linearRampToValueAtTime(1.0, t + 3);
       pad = { gain: padGain };
     }
     function setOn(v){
