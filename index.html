@@ -622,7 +622,7 @@
   <div class="iring"></div>
   <div class="iline"></div>
   <div class="iname">John Michael Eborda</div>
-  <div class="ienter"><button type="button" data-enter>Enter</button><button type="button" class="gold" data-enter-sound>Enter with sound</button></div>
+  <div class="ienter"><button type="button" data-enter>Enter</button><button type="button" class="gold" data-enter-sound>Enter with sound effects</button></div>
   <div class="iskip">Or click anywhere to skip</div>
 </div>
 <div class="progress" aria-hidden="true"></div>
@@ -1119,7 +1119,7 @@
 </footer>
 </div><!-- /.finale -->
 
-<button class="snd" type="button" data-snd aria-label="Toggle sound" aria-pressed="false" title="Sound">
+<button class="snd" type="button" data-snd aria-label="Toggle sound effects" aria-pressed="false" title="Sound effects">
   <i class="waves" aria-hidden="true"></i><i class="waves" aria-hidden="true"></i>
   <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="on-line" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/><path class="off-line" d="M17 9l4 6M21 9l-4 6"/></svg>
 </button>
@@ -1243,7 +1243,7 @@
 
   /* ---------- sound: synthesised with Web Audio, opt-in, off by default ---------- */
   var Snd = (function(){
-    var ctx = null, master = null, pad = null, on = false, btn = document.querySelector('[data-snd]');
+    var ctx = null, master = null, on = false, btn = document.querySelector('[data-snd]');
     var SCALE = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33, 659.25, 739.99, 880.00, 987.77]; /* D major pentatonic */
     function ensure(){
       if (ctx) return true;
@@ -1265,67 +1265,11 @@
       o.connect(g); o2.connect(g2); g2.connect(g); g.connect(master); g.connect(reverb());
       o.start(at); o2.start(at); o.stop(at + dur + .1); o2.stop(at + dur + .1);
     }
-    /* anthem loop in D major: Bm – G – D – A (vi – IV – I – V), 104 BPM, 2 bars per chord */
-    var CHORDS = [
-      [123.47, 185.00, 246.94, 293.66, 369.99],   /* B  F# B  D  F#  */
-      [98.00,  146.83, 196.00, 246.94, 293.66],   /* G  D  G  B  D   */
-      [146.83, 220.00, 293.66, 369.99, 440.00],   /* D  A  D  F# A   */
-      [110.00, 164.81, 220.00, 277.18, 329.63]    /* A  E  A  C# E   */
-    ];
-    var BPM = 104, BEAT = 60 / BPM, BAR = BEAT * 4;
-    var pad = null, seqTimer = null, chordIdx = 0, bar = 0, nextBar = 0;
-    function startPad(){
-      if (pad) return;
-      var t = ctx.currentTime;
-      var filt = ctx.createBiquadFilter(); filt.type = 'lowpass'; filt.frequency.value = 1100; filt.Q.value = .4;
-      var padGain = ctx.createGain(); padGain.gain.value = 0; filt.connect(padGain); padGain.connect(master); padGain.connect(reverb());
-      var voices = [];
-      for (var i = 0; i < 5; i++) (function(i){
-        var osc = ctx.createOscillator(), g = ctx.createGain(); osc.type = i < 2 ? 'sine' : 'triangle'; osc.frequency.value = CHORDS[0][i];
-        g.gain.value = [ .26, .14, .10, .08, .06 ][i]; osc.connect(g); g.connect(filt); osc.start();
-        var vib = ctx.createOscillator(), vg = ctx.createGain(); vib.frequency.value = .12 + i * .04; vg.gain.value = 2 + i; vib.connect(vg); vg.connect(osc.detune); vib.start();
-        voices.push(osc);
-      })(i);
-      var setChord = function(k, at){ CHORDS[k].forEach(function(f, i){ voices[i].frequency.setTargetAtTime(f, at, .12); }); };
-      /* low heartbeat: soft sub thump on beats 1 and 3 */
-      var thump = function(at, vol){
-        var o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine';
-        o.frequency.setValueAtTime(110, at); o.frequency.exponentialRampToValueAtTime(48, at + .18);
-        g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(vol, at + .012); g.gain.exponentialRampToValueAtTime(.0006, at + .42);
-        o.connect(g); g.connect(master); o.start(at); o.stop(at + .5);
-      };
-      /* schedule one bar at a time, a little ahead of the clock */
-      var scheduleBar = function(at){
-        var k = Math.floor(bar / 2) % CHORDS.length, ch = CHORDS[k], phase = bar % 8;   /* 8-bar phrase */
-        if (bar % 2 === 0) setChord(k, at);
-        thump(at, .5); thump(at + BEAT * 2, .38);
-        /* driving ostinato: eighth notes climbing the chord, an octave above the pad; intensity builds through the phrase */
-        var lift = .55 + (phase / 7) * .45, pat = [1, 2, 3, 4, 3, 2, 3, 4];
-        for (var e = 0; e < 8; e++){
-          var f = ch[pat[e]] * 2 * (phase >= 6 && e >= 4 ? 2 : 1);   /* last two bars jump an octave */
-          pluck(f, at + e * BEAT / 2, .11 * lift * (e % 2 ? .8 : 1), 1.1);
-        }
-        /* melody fragment on bars 4 and 8: a rising call over the top */
-        if (phase === 3 || phase === 7){ [3, 4, 3, 4].forEach(function(ix, j){ pluck(ch[ix] * 4, at + BEAT * 2 + j * BEAT / 2, .12, 1.8); }); pluck(ch[4] * 4 * (phase === 7 ? 2 : 1.5), at + BAR - BEAT / 2, .15, 2.6); }
-        /* swell into the next phrase */
-        if (phase === 7){ filt.frequency.setValueAtTime(1100, at); filt.frequency.linearRampToValueAtTime(2600, at + BAR); filt.frequency.setTargetAtTime(1100, at + BAR, .6); }
-        bar++;
-      };
-      nextBar = t + .1;
-      var tick = function(){
-        if (!on) { seqTimer = setTimeout(tick, 200); return; }
-        while (nextBar < ctx.currentTime + .6){ scheduleBar(nextBar); nextBar += BAR; }
-        seqTimer = setTimeout(tick, 120);
-      };
-      tick();
-      padGain.gain.linearRampToValueAtTime(1.0, t + 3);
-      pad = { gain: padGain };
-    }
     function setOn(v){
-      on = v; if (btn){ btn.classList.toggle('on', v); btn.setAttribute('aria-pressed', v ? 'true' : 'false'); }
+      on = v; if (btn){ btn.classList.toggle('on', v); btn.setAttribute('aria-pressed', v ? 'true' : 'false'); if (v) btn.classList.add('show'); }
       try { sessionStorage.setItem('sound', v ? '1' : '0'); } catch(err){}
       if (!ensure()) return;
-      if (v) { if (ctx.state === 'suspended') ctx.resume(); startPad(); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(1.0, ctx.currentTime + 1.2); }
+      if (v) { if (ctx.state === 'suspended') ctx.resume(); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(1.0, ctx.currentTime + .4); }
       else { master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(0, ctx.currentTime + .6); }
     }
     /* magic: a rising sparkle of notes with a shimmer of air on top */
